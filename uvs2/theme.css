@@ -1,0 +1,852 @@
+/* ============================================================
+   UVNS SERVICES — GLOBAL THEME OVERRIDE
+   Brand gradient: linear-gradient(90deg, #EA8800, #135BEC)
+   Primary accent: #EA8800 (Amber/Orange)
+   Secondary accent: #135BEC (Royal Blue)
+   Dark base: #0F172A
+   ============================================================ */
+
+/* ── ROOT VARIABLE OVERRIDES ── */
+:root {
+    /* Core brand gradient */
+    --grad:            linear-gradient(90deg, #EA8800, #135BEC);
+    --grad-rev:        linear-gradient(90deg, #135BEC, #EA8800);
+    --grad-diag:       linear-gradient(135deg, #EA8800, #135BEC);
+    --grad-vert:       linear-gradient(180deg, #EA8800, #135BEC);
+
+    /* Brand colours */
+    --brand-orange:    #EA8800;
+    --brand-orange-dk: #c97300;
+    --brand-orange-lt: rgba(234,136,0,.12);
+    --brand-blue:      #135BEC;
+    --brand-blue-dk:   #0d44b8;
+    --brand-blue-lt:   rgba(19,91,236,.12);
+
+    /* Dark base */
+    --dark:            #0F172A;
+    --dark-mid:        #1E293B;
+    --dark-card:       #263348;
+
+    /* Light base */
+    --light:           #F3F6FE;
+    --light-warm:      #FFF8EE;
+    --white:           #ffffff;
+
+    /* Text */
+    --text-dark:       #0F172A;
+    --text-muted:      #64748B;
+    --text-light:      rgba(255,255,255,.65);
+
+    /* Overwrite original variables to keep existing markup working */
+    --ThreeColor:      #0F172A;
+    --FourColor:       #EA8800;
+    --FiveColor:       #135BEC;
+    --NineColor:       #F3F6FE;
+
+    /* Border utilities */
+    --border-light:    rgba(255,255,255,.08);
+    --border-orange:   rgba(234,136,0,.35);
+    --border-blue:     rgba(19,91,236,.2);
+    --shadow-orange:   0 8px 28px rgba(234,136,0,.2);
+    --shadow-blue:     0 8px 28px rgba(19,91,236,.2);
+    --shadow-grad:     0 8px 28px rgba(19,91,236,.18);
+}
+
+/* ════════════════════════════════════════════
+   GLOBAL GRADIENT UTILITY CLASSES
+════════════════════════════════════════════ */
+.bg-grad         { background: var(--grad) !important; }
+.bg-grad-rev     { background: var(--grad-rev) !important; }
+.bg-grad-diag    { background: var(--grad-diag) !important; }
+.text-grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.border-grad {
+    border: 1.5px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                var(--grad) border-box;
+}
+
+/* ════════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════════ */
+.top-header {
+    background: var(--dark) !important;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.top-header .navbar-nav li a:hover {
+    color: var(--brand-orange) !important;
+}
+.top-header .navbar-nav li a.active {
+    color: var(--brand-orange) !important;
+}
+.top-header .navbar-brand img {
+    filter: brightness(1);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BUTTON SYSTEM — Complete Redesign
+   All old criss-cross blob animations removed.
+   New system: shimmer sweep + lift + glow + ripple
+════════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ── */
+
+/* 1. Shimmer sweep across button face */
+@keyframes btn-shimmer {
+    0%   { transform: translateX(-120%) skewX(-20deg); }
+    100% { transform: translateX(220%)  skewX(-20deg); }
+}
+
+/* 2. Ripple burst from centre on click */
+@keyframes btn-ripple {
+    0%   { transform: translate(-50%,-50%) scale(0); opacity: .55; }
+    80%  { transform: translate(-50%,-50%) scale(3.5); opacity: .1; }
+    100% { transform: translate(-50%,-50%) scale(4);   opacity: 0;  }
+}
+
+/* 3. Pulse glow ring for .btn-pilot */
+@keyframes btn-pulse-ring {
+    0%   { box-shadow: 0 0 0 0   rgba(234,136,0,.55); }
+    70%  { box-shadow: 0 0 0 10px rgba(234,136,0,0);  }
+    100% { box-shadow: 0 0 0 0   rgba(234,136,0,0);   }
+}
+
+/* 4. Border-chase animation for outline buttons */
+@keyframes btn-border-chase {
+    0%,100% { background-position: 0%   50%; }
+    50%     { background-position: 100% 50%; }
+}
+
+/* 5. Subtle icon nudge (used on link-style btns) */
+@keyframes btn-icon-nudge {
+    0%,100% { transform: translateX(0); }
+    50%     { transform: translateX(4px); }
+}
+
+/* ────────────────────────────────────────────
+   BASE: all buttons share these resets
+──────────────────────────────────────────── */
+ 
+/* ────────────────────────────────────────────
+   PRIMARY — .quick-btn
+   Gradient fill + shimmer sweep + lift + glow
+──────────────────────────────────────────── */
+ 
+
+/* ────────────────────────────────────────────
+   OUTLINE — .btn-outline-light / .btn-outline-w
+   Animated gradient border + fill sweep on hover
+──────────────────────────────────────────── */
+.btn-outline-light,
+.btn-outline-w,
+.btn-outline-dark {
+    background: transparent !important; 
+    font-size: .875rem;
+    font-weight: 700;
+    border-radius: 45px;
+    padding: 8px 24px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition:
+        border-color .3s ease,
+        color .3s ease,
+        transform .25s cubic-bezier(.34,1.56,.64,1),
+        box-shadow .3s ease !important;
+}
+
+/* The fill that sweeps in from left */
+.btn-outline-light::before,
+.btn-outline-w::before,
+.btn-outline-dark::before {
+    all: unset !important;
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(90deg, #EA8800, #135BEC) !important;
+    transform: scaleX(0) !important;
+    transform-origin: left center !important;
+    border-radius: 45px !important;
+    z-index: -1 !important;
+    transition: transform .35s cubic-bezier(.4,0,.2,1) !important;
+}
+.btn-outline-light::after,
+.btn-outline-w::after,
+.btn-outline-dark::after { display: none !important; }
+
+.btn-outline-light:hover,
+.btn-outline-w:hover,
+.btn-outline-dark:hover {
+    border-color: transparent !important;
+    color: #fff !important; 
+    box-shadow: 0 8px 28px rgba(234,136,0,.3), 0 4px 12px rgba(19,91,236,.2) !important;
+}
+.btn-outline-light:hover::before,
+.btn-outline-w:hover::before,
+.btn-outline-dark:hover::before {
+    transform: scaleX(1) !important;
+}
+.btn-outline-light:active,
+.btn-outline-w:active,
+.btn-outline-dark:active {
+    transform: translateY(-1px) scale(.98) !important;
+}
+
+/* Dark-context variant (on white bg) */
+.btn-outline-dark {
+    border-color: rgba(15,23,42,.35) !important;
+    color: #0F172A !important;
+}
+.btn-outline-dark:hover { color: #fff !important; }
+
+/* ────────────────────────────────────────────
+   PILOT / NAV CTA — .btn-pilot
+   Pulsing ring + gradient fill on hover
+──────────────────────────────────────────── */
+  
+/* ────────────────────────────────────────────
+   BLOG CTA — .btn-blog-cta
+   Gradient border + fill on hover
+──────────────────────────────────────────── */
+.btn-blog-cta {
+    background: transparent !important;
+    border: 2px solid #135BEC !important;
+    color: #135BEC !important;
+    font-size: .85rem;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 10px 22px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition:
+        border-color .3s ease,
+        color .3s ease,
+        transform .25s cubic-bezier(.34,1.56,.64,1),
+        box-shadow .3s ease !important;
+}
+.btn-blog-cta::before {
+    all: unset !important;
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(90deg, #EA8800, #135BEC) !important;
+    transform: scaleX(0) !important;
+    transform-origin: left !important;
+    z-index: -1 !important;
+    transition: transform .35s cubic-bezier(.4,0,.2,1) !important;
+}
+.btn-blog-cta::after { display: none !important; }
+.btn-blog-cta:hover {
+    border-color: transparent !important;
+    color: #fff !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 24px rgba(19,91,236,.3) !important;
+}
+.btn-blog-cta:hover::before { transform: scaleX(1) !important; }
+.btn-blog-cta:active { transform: translateY(-1px) scale(.98) !important; }
+.btn-blog-cta i { transition: transform .25s ease; }
+.btn-blog-cta:hover i { transform: translateX(4px); }
+
+/* ────────────────────────────────────────────
+   LINK-STYLE BUTTONS — .srv-card-link / .why-card-link
+   Animated arrow nudge + underline slide
+──────────────────────────────────────────── */
+.srv-card-link,
+.why-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .82rem;
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+    transition: gap .25s ease, color .2s ease !important;
+}
+.srv-card-link::after,
+.why-card-link::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important; left: 0 !important;
+    width: 0 !important; height: 2px !important;
+    background: linear-gradient(90deg, #EA8800, #135BEC) !important;
+    transition: width .3s ease !important;
+}
+.srv-card-link:hover,
+.why-card-link:hover {
+    gap: 12px !important;
+}
+.srv-card-link:hover::after,
+.why-card-link:hover::after {
+    width: 100% !important;
+}
+.srv-card-link i,
+.why-card-link i {
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1) !important;
+}
+.srv-card-link:hover i,
+.why-card-link:hover i {
+    transform: translateX(5px) !important;
+    animation: btn-icon-nudge .6s ease .25s !important;
+}
+
+/* ────────────────────────────────────────────
+   FORM SUBMIT — .home-submit-btn
+   Wide gradient + shimmer on hover
+──────────────────────────────────────────── */
+.home-submit-btn {
+    width: 100% !important;
+    border-radius: 8px !important;
+    background: linear-gradient(90deg, #EA8800 0%, #135BEC 100%) !important;
+    background-size: 200% 100% !important;
+    background-position: left center !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+    padding: 12px 20px !important;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+        background-position .5s ease,
+        transform .2s ease,
+        box-shadow .3s ease !important;
+    box-shadow: 0 4px 16px rgba(19,91,236,.25);
+}
+.home-submit-btn::before {
+    all: unset !important;
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    width: 40% !important; height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent) !important;
+    transform: translateX(-120%) skewX(-15deg) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+.home-submit-btn::after { display: none !important; }
+.home-submit-btn:hover {
+    background-position: right center !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 28px rgba(19,91,236,.35) !important;
+    color: #fff !important;
+}
+.home-submit-btn:hover::before {
+    animation: btn-shimmer .65s ease forwards !important;
+}
+.home-submit-btn:active {
+    transform: translateY(0) scale(.99) !important;
+    box-shadow: 0 3px 10px rgba(19,91,236,.25) !important;
+}
+
+/* ════════════════════════════════════════════
+   ABOUT IMAGE CORNER ACCENT
+════════════════════════════════════════════ */
+.about-image::after {
+    background: var(--grad) !important;
+}
+
+/* Stats box hover */
+.stat-box:hover .about-icon { background: var(--brand-blue) !important; }
+.stat-box:hover .title       { color: var(--brand-blue) !important; }
+.stat-box:hover p            { color: var(--brand-blue) !important; }
+
+/* Stats band accent left border */
+ 
+
+/* ════════════════════════════════════════════
+   SERVICE SECTION
+════════════════════════════════════════════ */
+/* .icon-box {
+    background: var(--grad) !important;
+} */
+/* .icon-box.orange {
+    background: var(--grad-rev) !important;
+} */
+.service-overlay {
+    background: linear-gradient(0deg, rgba(15,23,42,.9) 0%, transparent 100%) !important;
+}
+
+/* ════════════════════════════════════════════
+   PROCESS SECTION
+════════════════════════════════════════════ */
+    
+/* ════════════════════════════════════════════
+   WHY UVNS TABS
+════════════════════════════════════════════ */
+.legal-ul li a.active,
+.legal-ul li .active { 
+    color: #fff !important;
+}
+.legal-ul li a:hover {
+    background: var(--grad) !important;
+    color: #fff !important;
+}
+
+/* ════════════════════════════════════════════
+   ABOUT-UL LIST HOVER
+════════════════════════════════════════════ */
+.about-ul li:hover { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   OWL NAV ARROWS
+════════════════════════════════════════════ */
+.owl-nav .owl-prev,
+.owl-nav .owl-next,
+.owl-nav .prev,
+.owl-nav .next {
+    color: var(--brand-blue) !important;
+}
+.owl-nav .owl-prev:hover,
+.owl-nav .owl-next:hover,
+.owl-nav .prev:hover,
+.owl-nav .next:hover {
+    background: var(--grad) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+}
+.owl-nav .owl-prev2:hover,
+.owl-nav .owl-next2:hover,
+.owl-nav .prev2:hover,
+.owl-nav .next2:hover {
+    background: var(--grad) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+}
+.impact-owl .owl-nav .owl-prev2:hover,
+.impact-owl .owl-nav .owl-next2:hover {
+    background: var(--grad) !important;
+    color: #fff !important;
+}
+
+/* ════════════════════════════════════════════
+   FOOTER LINKS HOVER
+════════════════════════════════════════════ */
+.footer a:hover { color: var(--brand-orange) !important; }
+.social-icons a:hover {
+    background: var(--grad) !important;
+}
+.foot-add .fas {
+    background: var(--dark-mid) !important;
+}
+
+/* ════════════════════════════════════════════
+   SECTION TITLE ACCENTS (global .title-s)
+════════════════════════════════════════════ */
+.title-s {
+    color: var(--brand-orange) !important;
+}
+.title-s::before {
+    background: var(--brand-orange) !important;
+}
+
+/* ════════════════════════════════════════════
+   PAGE HERO BANNERS (about, contact, services, whyus)
+════════════════════════════════════════════ */
+.page-hero {
+    background: var(--dark) !important;
+    position: relative;
+    overflow: hidden;
+}
+.page-hero::after {
+    background: radial-gradient(circle, rgba(234,136,0,.18) 0%, transparent 70%) !important;
+}
+.page-hero h1 em,
+.page-hero h1 span { color: var(--brand-orange) !important; }
+
+.hero-badge {
+    background: rgba(234,136,0,.12) !important;
+    border-color: rgba(234,136,0,.35) !important;
+    color: var(--brand-orange) !important;
+}
+
+.breadcrumb-wrap a:hover { color: var(--brand-orange) !important; }
+.breadcrumb-wrap span    { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   STATS BANDS (about, services, whyus)
+════════════════════════════════════════════ */
+.stats-band,
+.stat-band-grid ~ * { background: var(--dark) !important; }
+.stat-band-item::before {
+    background: var(--brand-orange) !important;
+}
+.stat-band-num { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   WHO WE ARE / WHY CARDS
+════════════════════════════════════════════ */
+.who-card::before,
+.why-card::before,
+.srv-card::before {
+    background: var(--grad) !important;
+}
+.who-card:hover,
+.why-card:hover,
+.srv-card:hover {
+    box-shadow: var(--shadow-grad) !important;
+}
+.who-icon { background: var(--light) !important; border-color: var(--border-blue) !important; }
+.who-icon i,
+.why-card-icon i { color: var(--brand-blue) !important; }
+
+/* ════════════════════════════════════════════
+   SERVICE CARDS (services.html)
+════════════════════════════════════════════ */
+.srv-card-num {
+    background: var(--grad) !important;
+    color: #fff !important;
+}
+.srv-tag {
+    background: var(--light) !important;
+    color: var(--brand-blue) !important;
+    border-color: var(--border-blue) !important;
+}
+.srv-card-link { color: var(--brand-blue) !important; }
+.srv-card-link:hover { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   FEATURE DETAIL SECTION (services.html)
+════════════════════════════════════════════ */
+.feature-icon-box {
+    background: var(--light) !important;
+    border-color: var(--border-blue) !important;
+}
+.feature-icon-box i { color: var(--brand-blue) !important; }
+.feature-body ul li {
+    background: var(--light) !important;
+    color: var(--brand-blue) !important;
+    border-color: var(--border-blue) !important;
+}
+
+/* ════════════════════════════════════════════
+   SIDEBAR CARD (services.html)
+════════════════════════════════════════════ */
+.sidebar-card {
+    background: var(--grad) !important;
+}
+.sidebar-card::before {
+    background: radial-gradient(circle, rgba(255,255,255,.15) 0%, transparent 70%) !important;
+}
+.sidebar-list-item i { color: rgba(255,255,255,.85) !important; }
+
+/* ════════════════════════════════════════════
+   PROCESS STEPS (services.html)
+════════════════════════════════════════════ */
+.process-section.services-process {
+    background: var(--dark) !important;
+}
+.step-icon-wrap {
+    background: rgba(234,136,0,.12) !important;
+    border-color: rgba(234,136,0,.35) !important;
+}
+.step-icon-wrap i { color: var(--brand-orange) !important; }
+.process-step:hover .step-icon-wrap {
+    background: var(--grad) !important;
+    border-color: transparent !important;
+}
+.process-step:hover .step-icon-wrap i { color: #fff !important; }
+.step-num { background: var(--grad) !important; }
+
+/* ════════════════════════════════════════════
+   AI STRIP (services.html)
+════════════════════════════════════════════ */
+.ai-strip {
+    background: linear-gradient(135deg, var(--light) 0%, #e8f0fe 100%) !important;
+}
+.ai-strip-stat .n { color: var(--brand-blue) !important; }
+
+/* ════════════════════════════════════════════
+   TESTIMONIAL STRIPS
+════════════════════════════════════════════ */
+.testi-strip {
+    background: var(--grad) !important;
+}
+
+/* ════════════════════════════════════════════
+   CTA SECTIONS
+════════════════════════════════════════════ */
+.cta-section h2 span { color: var(--brand-orange) !important; }
+.cta-section .title-s { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   COMPARISON TABLE (whyus.html)
+════════════════════════════════════════════ */
+.compare-table th:last-child {
+    background: var(--grad) !important;
+}
+.compare-table th:nth-child(2) {
+    background: var(--dark) !important;
+}
+.compare-table th:last-child::after {
+    background: rgba(0,0,0,.2) !important;
+}
+.compare-table td.yes { color: #059669 !important; }
+.compare-table td.no  { color: #bbb !important; }
+.check-icon { color: #059669 !important; }
+.cross-icon { color: #FDA99A !important; }
+
+/* ════════════════════════════════════════════
+   TESTIMONIAL CARDS (whyus.html)
+════════════════════════════════════════════ */
+.testi-stars i { color: var(--brand-orange) !important; }
+.testi-quote   { color: var(--brand-orange) !important; }
+.testi-role    { color: var(--brand-blue) !important; }
+.testi-card:hover {
+    box-shadow: var(--shadow-grad) !important;
+}
+
+/* ════════════════════════════════════════════
+   PILLARS SECTION (whyus.html)
+════════════════════════════════════════════ */
+.pillars-section {
+    background: var(--dark) !important;
+}
+.pillar-item:hover {
+    background: rgba(234,136,0,.07) !important;
+    border-color: rgba(234,136,0,.28) !important;
+}
+.pillar-num {
+    background: rgba(234,136,0,.15) !important;
+    border-color: rgba(234,136,0,.3) !important;
+    color: var(--brand-orange) !important;
+}
+.pillar-img-badge {
+    background: rgba(234,136,0,.15) !important;
+    border-color: rgba(234,136,0,.35) !important;
+}
+.pillar-img-badge h6 { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   PILOT CTA (whyus.html)
+════════════════════════════════════════════ */
+.pilot-cta {
+    background: var(--dark) !important;
+    position: relative;
+}
+.pilot-cta::before {
+    background: radial-gradient(circle, rgba(234,136,0,.15) 0%, transparent 70%) !important;
+}
+.pilot-cta h2 span { color: var(--brand-orange) !important; }
+.pilot-feat i { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   STATS BAND (whyus.html)
+════════════════════════════════════════════ */
+.stats-band {
+    background: #fff !important;
+    border-bottom: 1px solid rgba(234,136,0,.1) !important;
+}
+.stat-item::before {
+    background: var(--grad) !important;
+}
+.stat-item .num { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   WHY CARD ICONS (whyus.html)
+════════════════════════════════════════════ */
+.why-card-icon {
+    background: var(--light) !important;
+    border-color: var(--border-blue) !important;
+}
+.why-card-icon i { color: var(--brand-blue) !important; }
+.why-card-link { color: var(--brand-orange) !important; }
+.why-card-link:hover { color: var(--brand-blue) !important; }
+
+/* ════════════════════════════════════════════
+   FAQ ACCORDION (whyus.html)
+════════════════════════════════════════════ */
+.faq-accordion .accordion-item {
+    border-color: rgba(234,136,0,.15) !important;
+}
+.faq-accordion .accordion-button {
+    background: rgba(234,136,0,.05) !important;
+    color: var(--dark) !important;
+}
+.faq-accordion .accordion-button:not(.collapsed) {
+    color: var(--brand-orange) !important;
+    background: rgba(234,136,0,.08) !important;
+}
+
+/* ════════════════════════════════════════════
+   CONTACT PAGE
+════════════════════════════════════════════ */
+.page-hero.contact-hero { background: var(--dark) !important; }
+
+.info-card:hover {
+    border-color: var(--brand-orange) !important;
+    box-shadow: var(--shadow-orange) !important;
+}
+.info-card h6     { color: var(--brand-orange) !important; }
+.info-icon        { background: var(--light) !important; border-color: var(--border-blue) !important; }
+.info-icon i      { color: var(--brand-blue) !important; }
+
+.social-links a:hover {
+    background: var(--grad) !important;
+    border-color: transparent !important;
+}
+
+.form-card::before {
+    background: var(--grad) !important;
+}
+.form-control:focus {
+    border-color: var(--brand-blue) !important;
+    box-shadow: 0 0 0 3px rgba(19,91,236,.1) !important;
+}
+
+.check-item:hover {
+    background: var(--light) !important;
+    border-color: var(--brand-blue) !important;
+}
+.check-item input[type="checkbox"] {
+    accent-color: var(--brand-blue) !important;
+}
+
+.form-note i { color: var(--brand-blue) !important; }
+
+.faq-item {
+    border-left-color: var(--brand-orange) !important;
+}
+.faq-section { background: var(--light) !important; }
+
+.pilot-strip { background: var(--grad) !important; }
+.pilot-btn { background: #fff !important; color: var(--dark) !important; }
+.pilot-btn:hover { color: var(--brand-orange) !important; }
+
+.map-pin-card h6 i { color: var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   ABOUT PAGE
+════════════════════════════════════════════ */
+.mission-img-wrap::after { background: var(--brand-orange) !important; }
+.chip { background: var(--light) !important; border-color: var(--border-blue) !important; }
+.chip i { color: var(--brand-blue) !important; }
+
+.srv-num { background: var(--grad) !important; color: #fff !important; }
+.srv-item:hover { border-color: var(--brand-orange) !important; }
+
+.why-dot { background: var(--brand-orange) !important; }
+.why-item:hover {
+    background: rgba(234,136,0,.06) !important;
+    border-color: rgba(234,136,0,.22) !important;
+}
+
+.team-avatar {
+    background: linear-gradient(135deg, var(--dark), var(--dark-mid)) !important;
+}
+.team-avatar::after { background: var(--grad) !important; }
+.team-body span { color: var(--brand-blue) !important; }
+
+/* ════════════════════════════════════════════
+   HISTORY RADIAL PAGE
+════════════════════════════════════════════ */
+/* The history page uses its own :root vars that override correctly
+   via the --orange and --blue variable names. We inject a small
+   override block so it picks up the brand colours. */
+#stars ~ .page .logo-dot { background: var(--brand-orange) !important; box-shadow: 0 0 8px var(--brand-orange) !important; }
+
+/* ════════════════════════════════════════════
+   AI + BLOG SECTION (index.html)
+════════════════════════════════════════════ */
+#ai-blogs-section {
+    background: var(--light) !important;
+}
+.ai-panel {
+    background: var(--dark) !important;
+}
+.ai-panel-badge {
+    background: rgba(234,136,0,.12) !important;
+    border-color: rgba(234,136,0,.3) !important;
+    color: var(--brand-orange) !important;
+}
+.ai-panel h3 em { color: var(--brand-orange) !important; }
+.ai-feat:hover {
+    background: rgba(234,136,0,.07) !important;
+    border-color: rgba(234,136,0,.25) !important;
+}
+.ai-feat-icon {
+    background: rgba(234,136,0,.12) !important;
+    border-color: rgba(234,136,0,.25) !important;
+}
+.ai-stat-pill .num { color: var(--brand-orange) !important; }
+/* btn-ai-cta and btn-blog-cta are fully defined in the Button System above */
+
+.blog-panel::before { background: var(--grad) !important; }
+.blog-panel-badge {
+    background: rgba(19,91,236,.08) !important;
+    border-color: rgba(19,91,236,.2) !important;
+    color: var(--brand-blue) !important;
+}
+.blog-panel h3 span { color: var(--brand-blue) !important; }
+.blog-entry-tag {
+    color: var(--brand-orange) !important;
+    background: rgba(234,136,0,.1) !important;
+}
+.blog-entry:hover h6 { color: var(--brand-blue) !important; }
+.blog-num { color: var(--brand-blue) !important; border-color: var(--border-blue) !important; }
+.blog-entry:hover .blog-num {
+    background: var(--grad) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+}
+/* btn-blog-cta fully defined in the Button System above */
+
+/* ════════════════════════════════════════════
+   SECTION HEADING ACCENTS (global)
+════════════════════════════════════════════ */
+.section-title span { color: var(--brand-blue) !important; } 
+
+/* overline dots & eyebrows */
+.abs-eyebrow          { color: var(--brand-orange) !important; }
+.abs-eyebrow::before,
+.abs-eyebrow::after   { background: var(--brand-orange) !important; }
+.abs-section-header h2 span { color: var(--brand-blue) !important; }
+
+/* ════════════════════════════════════════════
+   BANNER SECTION (carousel)
+════════════════════════════════════════════ */
+.hero h1 span { color: var(--brand-orange) !important; }
+.premium-txt {
+    background: var(--grad) !important;
+    border: none !important;
+    color: #fff !important;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: var(--grad) !important;
+}
+
+/* home-submit-btn fully defined in the Button System above */
+
+/* ════════════════════════════════════════════
+   SCROLLBAR (optional branding touch)
+════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--light); }
+::-webkit-scrollbar-thumb {
+    background: var(--grad);
+    border-radius: 3px;
+}
+
+/* ════════════════════════════════════════════
+   SELECTION HIGHLIGHT
+════════════════════════════════════════════ */
+::selection {
+    background: rgba(234,136,0,.25);
+    color: var(--dark);
+}

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Our Services — UVNS Services</title>
+
+    <link rel="stylesheet" href="bootstarp.min.css">
+    <link rel="stylesheet" href="owl.carousel.min.css">
+    <link rel="stylesheet" href="animate.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="accessibility-controls.css">
+    <link rel="stylesheet" href="material-symbols-outlined.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+
+    <style>
+        /* ══════════════════════════════════════════
+           SERVICES PAGE — Emerald / Forest Green Theme
+        ══════════════════════════════════════════ */
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            background: #0F172A;
+            padding: 20px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(16,185,129,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16,185,129,.05) 1px, transparent 1px);
+            background-size: 52px 52px;
+        }
+        .page-hero::after {
+            content: ''; position: absolute;
+            right: -100px; top: -100px;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(16,185,129,.2) 0%, transparent 68%);
+            pointer-events: none;
+        }
+        .page-hero-left {
+            content: ''; position: absolute;
+            left: -80px; bottom: -80px;
+            width: 360px; height: 360px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(52,211,153,.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .page-hero-inner { position: relative; z-index: 2; }
+
+        .breadcrumb-wrap {
+            display: flex; align-items: center; gap: 8px;
+            font-size: .8rem; color: rgba(255,255,255,.5);
+            margin-bottom: 18px;
+        }
+        .breadcrumb-wrap a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+        .breadcrumb-wrap a:hover { color: #EA8800; }
+        .breadcrumb-wrap span { color: #EA8800; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(16,185,129,.14);
+            border: 1px solid rgba(16,185,129,.38);
+            border-radius: 99px; padding: 6px 18px;
+            font-size: .7rem; font-weight: 700;
+            letter-spacing: .14em; text-transform: uppercase;
+            color: #EA8800; margin-bottom: 18px;
+        }
+        .hero-badge i { font-size: .75rem; }
+
+        .page-hero h1 {
+            font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+            font-weight: 800; color: #fff; line-height: 1.12; margin-bottom: 14px;
+        }
+        .page-hero h1 em { font-style: normal; color: #EA8800; }
+        .page-hero p {
+            font-size: .95rem; color: rgba(255,255,255,.6);
+            max-width: 540px; line-height: 1.75; margin-bottom: 28px;
+        }
+
+        /* hero stats row */
+        .hero-stat-row {
+            display: flex; gap: 32px; flex-wrap: wrap; margin-top: 32px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+        .hero-stat { text-align: left; }
+        .hero-stat .num {
+            font-size: 1.8rem; font-weight: 800; color: #EA8800; line-height: 1;
+        }
+        .hero-stat .lbl {
+            font-size: .72rem; color: rgba(255,255,255,.5);
+            margin-top: 3px; letter-spacing: .04em;
+        }
+
+        /* ── SECTION HELPERS ── */
+        .title-s {
+            font-size: .7rem; font-weight: 700;
+            letter-spacing: .16em; text-transform: uppercase;
+            color: #135BEC;
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 10px;
+        }
+        .title-s::before {
+            content: ''; display: block;
+            width: 22px; height: 2px;
+            background: #135BEC;
+        }
+        .section-title {
+            font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+            font-weight: 800; line-height: 1.2; color: #0F172A;
+        }
+        .section-title span { color: #135BEC; }
+        .section-sub {
+            font-size: .9rem; color: #666; max-width: 560px;
+            line-height: 1.75; margin-top: 10px;
+        }
+
+        /* ── SERVICES GRID SECTION ── */
+        .services-grid-section {
+            padding: 88px 0;
+            background: #F0FDF4;
+        }
+
+        .srv-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 0;
+            border: 1px solid rgba(5,150,105,.1);
+            overflow: hidden;
+            height: 100%;
+            transition: transform .25s, box-shadow .3s;
+            display: flex; flex-direction: column;
+        }
+        .srv-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(5,150,105,.14);
+        }
+
+        .srv-card-img {
+            width: 100%; height: 190px;
+            overflow: hidden; position: relative;
+        }
+        .srv-card-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .4s;
+        }
+        .srv-card:hover .srv-card-img img { transform: scale(1.05); }
+
+        .srv-card-img-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(5,46,22,.6) 100%);
+        }
+
+        .srv-card-num {
+            position: absolute; top: 14px; left: 16px;
+            width: 34px; height: 34px; border-radius: 8px;
+            background: #135BEC; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .7rem; font-weight: 800; letter-spacing: .04em;
+        }
+
+        .srv-card-body {
+            padding: 24px 24px 26px;
+            flex: 1; display: flex; flex-direction: column;
+        }
+        .srv-card-body h5 {
+            font-size: 1rem; font-weight: 800; color: #0F172A;
+            margin-bottom: 10px; line-height: 1.3;
+        }
+        .srv-card-body p {
+            font-size: .82rem; color: #555;
+            line-height: 1.7; flex: 1;
+        }
+
+        .srv-card-tags {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-top: 16px;
+        }
+        .srv-tag {
+            font-size: .65rem; font-weight: 700; letter-spacing: .08em;
+            text-transform: uppercase; padding: 3px 9px;
+            border-radius: 4px; background: #F3F6FE;
+            color: #135BEC; border: 1px solid rgba(5,150,105,.2);
+        }
+
+        .srv-card-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 18px;
+            font-size: .8rem; font-weight: 700; color: #135BEC;
+            text-decoration: none;
+            transition: gap .2s, color .2s;
+        }
+        .srv-card-link:hover { gap: 10px; color: #0d44b8; }
+        .srv-card-link i { font-size: .7rem; }
+
+        /* ── PROCESS SECTION ── */
+        .process-section {
+            padding: 88px 0;
+            background: #0F172A;
+            position: relative; overflow: hidden;
+        }
+        .process-section::before {
+            content: ''; position: absolute;
+            right: -120px; bottom: -120px;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(52,211,153,.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 52px;
+            position: relative;
+        }
+        .process-steps::before {
+            content: ''; position: absolute;
+            top: 28px; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(52,211,153,.35) 20%, rgba(52,211,153,.35) 80%, transparent);
+            pointer-events: none;
+        }
+        .process-step {
+            padding: 0 20px; text-align: center;
+            position: relative;
+        }
+        .step-icon-wrap {
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            background: rgba(52,211,153,.12);
+            border: 1.5px solid rgba(52,211,153,.35);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            position: relative; z-index: 2;
+            transition: background .25s, border-color .25s;
+        }
+        .process-step:hover .step-icon-wrap {
+            background: #135BEC;
+            border-color: #135BEC;
+        }
+        .step-icon-wrap i { color: #EA8800; font-size: 20px; transition: color .25s; }
+        .process-step:hover .step-icon-wrap i { color: #fff; }
+        .step-num {
+            position: absolute; top: -8px; right: -4px;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #135BEC; color: #fff;
+            font-size: .58rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .process-step h6 {
+            font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: 8px;
+        }
+        .process-step p {
+            font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.65;
+        }
+
+        /* ── FEATURE DETAIL SECTION ── */
+        .feature-detail-section {
+            padding: 88px 0;
+            background: #fff;
+        }
+        .feature-item {
+            display: flex; gap: 24px; align-items: flex-start;
+            padding: 28px 0;
+            border-bottom: 1px solid #f0fdf4;
+        }
+        .feature-item:last-child { border-bottom: none; }
+        .feature-icon-box {
+            width: 52px; height: 52px; flex-shrink: 0;
+            border-radius: 14px;
+            background: #F3F6FE;
+            border: 1px solid rgba(5,150,105,.18);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .feature-icon-box i { color: #135BEC; font-size: 20px; }
+        .feature-body h5 {
+            font-size: .98rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;
+        }
+        .feature-body p { font-size: .83rem; color: #666; line-height: 1.7; margin: 0; }
+        .feature-body ul {
+            margin-top: 10px; padding-left: 0; display: flex; flex-wrap: wrap; gap: 6px;
+        }
+        .feature-body ul li {
+            font-size: .72rem; background: #F3F6FE;
+            color: #135BEC; border: 1px solid rgba(5,150,105,.2);
+            border-radius: 5px; padding: 3px 10px;
+            font-weight: 600;
+        }
+
+        /* Sticky sidebar card */
+        .sticky-sidebar { position: sticky; top: 96px; }
+        .sidebar-card {
+            background: #0F172A;
+            border-radius: 20px; padding: 32px 28px;
+            position: relative; overflow: hidden;
+        }
+        .sidebar-card::before {
+            content: ''; position: absolute;
+            top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(52,211,153,.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .sidebar-card h4 {
+            font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 8px;
+        }
+        .sidebar-card p {
+            font-size: .82rem; color: rgba(255,255,255,.6); line-height: 1.7;
+            margin-bottom: 22px;
+        }
+        .sidebar-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+        .sidebar-list-item {
+            display: flex; align-items: center; gap: 10px;
+            font-size: .82rem; color: rgba(255,255,255,.75);
+        }
+        .sidebar-list-item i { color: #EA8800; font-size: .8rem; flex-shrink: 0; }
+
+        /* ── TECH STACK / AI STRIP ── */
+        .ai-strip {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #F3F6FE 0%, #e8f0fe 100%);
+        }
+        .ai-strip-inner {
+            display: flex; align-items: center;
+            justify-content: space-between; gap: 32px; flex-wrap: wrap;
+        }
+        .ai-strip-text h3 {
+            font-size: 1.4rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;
+        }
+        .ai-strip-text p { font-size: .88rem; color: #555; margin: 0; max-width: 480px; line-height: 1.7; }
+        .ai-strip-stats {
+            display: flex; gap: 28px; flex-wrap: wrap; flex-shrink: 0;
+        }
+        .ai-strip-stat { text-align: center; }
+        .ai-strip-stat .n { font-size: 1.7rem; font-weight: 800; color: #135BEC; line-height: 1; }
+        .ai-strip-stat .l { font-size: .7rem; color: #555; margin-top: 3px; letter-spacing: .04em; }
+
+        /* ── TESTIMONIAL STRIP ── */
+        .testi-strip {
+            background: #135BEC; padding: 56px 0;
+        }
+        .testi-strip blockquote {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 600; color: #fff;
+            text-align: center; line-height: 1.65;
+            max-width: 700px; margin: 0 auto;
+            font-style: italic;
+        }
+        .testi-strip cite {
+            display: block; margin-top: 14px;
+            font-size: .78rem; color: rgba(255,255,255,.72);
+            font-style: normal; letter-spacing: .06em; text-transform: uppercase;
+        }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            padding: 88px 0; background: #fff; text-align: center;
+        }
+        .cta-section h2 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800; color: #0F172A;
+        }
+        .cta-section h2 span { color: #135BEC; }
+        .cta-section p {
+            font-size: .9rem; color: #666;
+            max-width: 480px; margin: 12px auto 30px; line-height: 1.75;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 991px) {
+            .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .process-steps::before { display: none; }
+            .ai-strip-inner { flex-direction: column; text-align: center; }
+            .ai-strip-stats { justify-content: center; }
+        }
+        @media (max-width: 767px) {
+            .hero-stat-row { gap: 20px; }
+            .process-steps { grid-template-columns: 1fr; }
+            .feature-item { flex-direction: column; gap: 14px; }
+            .sticky-sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── NAVBAR ── -->
+    <div class="top-header">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html"><img src="uvns-logo.png" alt="UVNS Services" style="height:40px;"></a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                         <li class="nav-item"><a class="nav-link  " href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="whyus.html">Why Us</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item ms-3">
+                            <a class="btn quick-btn btn-pilot" href="contact.html">Start Free Pilot</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ── PAGE HERO ── -->
+    <section class="page-hero">
+        <div class="page-hero-left"></div>
+        <div class="container page-hero-inner">
+            <div class="row align-items-center g-5">
+                <div class="col-12 col-lg-7">
+                    <div class="breadcrumb-wrap">
+                        <a href="index.html">Home</a>
+                        <i class="fas fa-chevron-right" style="font-size:.6rem"></i>
+                        <span>Our Services</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-layer-group"></i>
+                        Comprehensive Legal Outsourcing
+                    </div>
+                    <h1>Precision Services for<br><em>Modern Law Firms</em></h1>
+                    <p>From case screening to complete document drafting — every service we offer is built around one goal: giving your legal team back the time and clarity they need to win cases.</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="contact.html" class="btn quick-btn">Start Free Pilot</a>
+                        <a href="#services-grid" class="btn quick-btn btn-outline-light">Browse Services</a>
+                    </div>
+                  
+                </div>
+                <div class="col-12 col-lg-5 d-none d-lg-block">
+                    <img src="ai.png" alt="UVNS Services" class="img-fluid" style=" width: auto;max-height:auto;object-fit:cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SERVICES GRID ── -->
+    <section class="services-grid-section" id="services-grid">
+        <div class="container">
+            <div class="row justify-content-between align-items-end mb-5">
+                <div class="col-lg-7">
+                    <div class="title-s">What We Offer</div>
+                    <h2 class="section-title">Our Core <span>Service Lines</span></h2>
+                    <p class="section-sub">Each service is delivered by trained legal professionals — not generalists — with structured quality checks at every stage.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                    <a href="contact.html" class="btn quick-btn">Request a Free Pilot</a>
+                </div>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Card 1 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="srv-card">
+                        <div class="srv-card-img">
+                            <img src="services-1.jpg" alt="Disability Review">
+                            <div class="srv-card-img-overlay"></div>
+                            <div class="srv-card-num">01</div>
+                        </div>
+                        <div class="srv-card-body">
+                            <h5>Disability Review</h5>
+                            <p>Comprehensive evaluation of disability claims including functional limitations, medical documentation analysis, and narrative summaries that support attorney strategy.</p>
+                            <div class="srv-card-tags">
+                                <span class="srv-tag">Workers' Comp</span>
+                                <span class="srv-tag">Personal Injury</span>
+                            </div>
+                            <a href="contact.html" class="srv-card-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="srv-card">
+                        <div class="srv-card-img">
+                            <img src="services-2.jpg" alt="Medical Records Review">
+                            <div class="srv-card-img-overlay"></div>
+                            <div class="srv-card-num">02</div>
+                        </div>
+                        <div class="srv-card-body">
+                            <h5>Medical Records Review</h5>
+                            <p>Systematic review of all medical records to identify key facts, treatment timelines, diagnosis inconsistencies, and documentation gaps critical to building a strong case.</p>
+                            <div class="srv-card-tags">
+                                <span class="srv-tag">Medical-Legal</span>
+                                <span class="srv-tag">Case Strategy</span>
+                            </div>
+                            <a href="contact.html" class="srv-card-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="srv-card">
+                        <div class="srv-card-img">
+                            <img src="services-3.jpg" alt="Medical Record Summaries">
+                            <div class="srv-card-img-overlay"></div>
+                            <div class="srv-card-num">03</div>
+                        </div>
+                        <div class="srv-card-body">
+                            <h5>Preparing Summary for Medical Records</h5>
+                            <p>Clear, structured summaries of complex medical records written for attorney comprehension — not clinical jargon. Chronological, concise, and action-ready.</p>
+                            <div class="srv-card-tags">
+                                <span class="srv-tag">Documentation</span>
+                                <span class="srv-tag">Summaries</span>
+                            </div>
+                            <a href="contact.html" class="srv-card-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="srv-card">
+                        <div class="srv-card-img">
+                            <img src="services-4.jpg" alt="Claim File Index">
+                            <div class="srv-card-img-overlay"></div>
+                            <div class="srv-card-num">04</div>
+                        </div>
+                        <div class="srv-card-body">
+                            <h5>Preparing Claim File Index</h5>
+                            <p>Organized, searchable indexing of workers' compensation claim files so your attorneys can instantly locate critical documents without wading through disorganized stacks.</p>
+                            <div class="srv-card-tags">
+                                <span class="srv-tag">Indexing</span>
+                                <span class="srv-tag">Organization</span>
+                            </div>
+                            <a href="contact.html" class="srv-card-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="srv-card">
+                        <div class="srv-card-img">
+                            <img src="services-5.jpg" alt="Preparing Medicals from Claim File">
+                            <div class="srv-card-img-overlay"></div>
+                            <div class="srv-card-num">05</div>
+                        </div>
+                        <div class="srv-card-body">
+                            <h5>Preparing The Medicals From The Claim File</h5>
+                            <p>Extraction and compilation of all medical documentation from a claim file into a structured, ready-to-review package — reducing attorney prep time dramatically.</p>
+                            <div class="srv-card-tags">
+                                <span class="srv-tag">Extraction</span>
+                                <span class="srv-tag">Compilation</span>
+                            </div>
+                            <a href="contact.html" class="srv-card-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="srv-card">
+                        <div class="srv-card-img">
+                            <img src="services-6.jpg" alt="Medical Index">
+                            <div class="srv-card-img-overlay"></div>
+                            <div class="srv-card-num">06</div>
+                        </div>
+                        <div class="srv-card-body">
+                            <h5>Preparing Medical Index</h5>
+                            <p>Detailed, cross-referenced medical index allowing attorneys and paralegals to navigate large volumes of medical evidence with precision and speed during case preparation.</p>
+                            <div class="srv-card-tags">
+                                <span class="srv-tag">Indexing</span>
+                                <span class="srv-tag">Reference</span>
+                            </div>
+                            <a href="contact.html" class="srv-card-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 — Full Width -->
+                <div class="col-12">
+                    <div class="srv-card" style="flex-direction:row;padding:0;max-height:220px;">
+                        <div style="flex-shrink:0;width:280px;" class="d-none d-md-block">
+                            <img src="accuracy.jpg" alt="Document Drafting" style="width:100%;height:220px;object-fit:cover;border-radius:20px 0 0 20px;">
+                        </div>
+                        <div class="srv-card-body" style="padding:28px 32px;justify-content:center;">
+                            <div style="display:flex;align-items:flex-start;gap:16px;">
+                                <div style="background:#F3F6FE;border:1px solid rgba(5,150,105,.2);border-radius:10px;padding:10px 14px;font-size:.7rem;font-weight:800;color:#135BEC;white-space:nowrap;flex-shrink:0;">07</div>
+                                <div>
+                                    <h5 style="font-size:1.05rem;">Document Drafting &amp; Legal Correspondence</h5>
+                                    <p style="margin-top:6px;">Full drafting of legal correspondence, demand letters, chronologies, and support documentation under attorney supervision. Every document is structured to support case strategy — not just fill a file.</p>
+                                    <div class="srv-card-tags" style="margin-top:12px;">
+                                        <span class="srv-tag">Drafting</span>
+                                        <span class="srv-tag">Demand Letters</span>
+                                        <span class="srv-tag">Chronologies</span>
+                                        <span class="srv-tag">Correspondence</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section class="process-section">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-2">
+                <div class="col-lg-7">
+                    <div class="title-s" style="justify-content:center; color:#EA8800;">Our Process</div>
+                    <h2 class="section-title" style="color:#fff;">How <span style="color:#EA8800;">It Works</span></h2>
+                    <p class="section-sub" style="color:rgba(255,255,255,.55);margin:10px auto 0;max-width:520px;">A clean, structured workflow built for law firms — from file submission to final delivery.</p>
+                </div>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-icon-wrap">
+                        <span class="step-num">01</span>
+                        <img src="process1.png" alt="Submit" style="width:26px;height:26px;object-fit:contain;filter:brightness(0)invert(1);">
+                    </div>
+                    <h6>Submit Your Case</h6>
+                    <p>Upload files securely via your preferred method — encrypted email, shared drive, or client portal. We adapt to your existing workflow.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon-wrap">
+                        <span class="step-num">02</span>
+                        <img src="process2.png" alt="Review" style="width:26px;height:26px;object-fit:contain;filter:brightness(0)invert(1);">
+                    </div>
+                    <h6>Expert Review</h6>
+                    <p>Certified legal professionals analyse documents with structured quality checks. Every file goes through multiple review stages before delivery.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon-wrap">
+                        <span class="step-num">03</span>
+                        <img src="process3.png" alt="Delivery" style="width:26px;height:26px;object-fit:contain;filter:brightness(0)invert(1);">
+                    </div>
+                    <h6>Delivery</h6>
+                    <p>Receive formatted summaries, indexes, and documents in your specified format — on time, every time. No follow-up required.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon-wrap">
+                        <span class="step-num">04</span>
+                        <img src="process4.png" alt="Support" style="width:26px;height:26px;object-fit:contain;filter:brightness(0)invert(1);">
+                    </div>
+                    <h6>Ongoing Support</h6>
+                    <p>We provide continuous assistance throughout the case lifecycle — revisions, queries, and rapid turnaround on supplemental requests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+ 
+
+    <!-- ── CTA ── -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="title-s" style="justify-content:center;">Get Started</div>
+            <h2>Ready to Reduce Your <span>Workload?</span></h2>
+            <p>Start with a free pilot case — no commitment, no risk. See the UVNS standard on a real file before making any decision.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a class="btn quick-btn" href="contact.html">Start Free Pilot</a>
+                <a class="btn quick-btn btn-outline-dark" href="whyus.html">Why Choose UVNS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer innerpage" >
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info mb-3">
+                        <ul class="foot-add">
+                            <li><i class="fas fa-map-marker-alt"></i>
+                                <div>First Floor, 5 Indus House, Connaught Place, Delhi - 110001</div>
+                            </li>
+                            <li><i class="fas fa-phone"></i><div>+91 9811298324</div></li>
+                            <li><i class="fas fa-envelope"></i><div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f7fbfae0f5f7e0d4e1e2fae7e7f1e6e2fdf7f1e7baf7fbf9">[email&#160;protected]</a></div></li>
+                        </ul>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footlink">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="whyus.html">Why UVNS</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Services</h5>
+                    <ul class="footlink">
+                        <li><a href="services.html">Case Screening</a></li>
+                        <li><a href="services.html">Medical Records</a></li>
+                        <li><a href="services.html">Summary Prep</a></li>
+                        <li><a href="services.html">Document Drafting</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5>Stay Updated</h5>
+                    <p class="subscribe-txt">Subscribe to our newsletter for the latest updates from UVNS Services.</p>
+                    <div class="input-group newsletter">
+                        <input type="email" class="updated-box" placeholder="Your email">
+                        <button class="btn quick-btn">Join</button>
+                    </div>
+                </div>
+            </div>
+           <div class="footer-bottom d-flex justify-content-between flex-wrap">
+                <div>© 2025 Copyright UVNS Services. All Rights Reserved</div>
+                <div>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a> |
+                    <a href="#">Disclaimer</a>
+                </div>
+            </div> 
+    </footer>
+
+     <!-- Floating WhatsApp FAB -->
+<div class="wa-fab">
+  <span class="wa-label" id="waLabel">Chat with us!</span>
+
+  <!-- Open popup -->
+  <button class="wa-btn" onclick="toggleWaPopup()" aria-label="Open WhatsApp Chat">
+    <svg viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="16" fill="#25d366"/>
+      <path d="M23.5 8.5A10.44 10.44 0 0 0 16 5.5C10.2 5.5 5.5 10.2 5.5 16c0 1.85.48 3.65 1.4 5.25L5.5 26.5l5.4-1.4A10.44 10.44 0 0 0 16 26.5c5.8 0 10.5-4.7 10.5-10.5 0-2.8-1.09-5.43-3-7.5z" fill="#fff"/>
+    </svg>
+  </button>
+</div>
+
+<div class="wa-popup " id="waPopup">
+  <!-- Header -->
+  <div class="wa-popup-header">
+    <div class="wa-avatar">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"></path>
+      </svg>
+    </div>
+    <div>
+      <h6>UVNS Support</h6>
+      <div class="wa-online">Online</div>
+    </div>
+    <button class="wa-close-btn" onclick="toggleWaPopup()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- Chat body -->
+  <div class="wa-popup-body">
+    <div class="wa-bubble">
+      <p>👋 Hi! May I help you?</p>
+      <div class="wa-bubble-time" id="waMsgTime">11:45 AM</div>
+    </div>
+  </div>
+
+  <!-- Footer input -->
+  <div class="wa-popup-footer">
+    <input class="wa-input" type="text" id="waInput" placeholder="Type a message…" onkeydown="if(event.key==='Enter') sendToWa()">
+    <button class="wa-send" onclick="sendToWa()" aria-label="Send">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 21l21-9L2 3v7l15 2-15 2z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+ <script>
+        // Time
+(function () {
+  var now = new Date();
+  var h = now.getHours(), m = now.getMinutes();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  var time = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+
+  var el = document.getElementById('waMsgTime');
+  if (el) el.textContent = time;
+})();
+
+// Hide label
+setTimeout(function () {
+  var lbl = document.getElementById('waLabel');
+  if (lbl) lbl.style.display = 'none';
+}, 4000);
+
+var isOpen = false;
+
+// Toggle popup
+function toggleWaPopup() {
+  isOpen = !isOpen;
+
+  var popup = document.getElementById('waPopup');
+  popup.classList.toggle('open', isOpen);
+
+  if (isOpen) {
+    setTimeout(function () {
+      document.getElementById('waInput').focus();
+    }, 300);
+  }
+}
+
+// ✅ FIXED FUNCTION
+function sendToWa() {
+  var input = document.getElementById('waInput');
+  var msg = input.value.trim();
+
+  if (!msg) msg = "Hi! I want to know more about your services.";
+
+  // 👉 YOUR NUMBER (no +, no space)
+  var phone = "919811298324";
+
+  // Encode message
+  var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+
+  // Open WhatsApp
+  window.open(url, "_blank");
+}
+</script>
