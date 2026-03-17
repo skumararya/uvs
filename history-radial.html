@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UVNS — Our History</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:   #0F172A;
+  --navy2:  #1E293B;
+  --navy3:  #263348;
+  --orange: #EA8800;
+  --orangeL:#F5A623;
+  --blue:   #135BEC;
+  --blueL:  #4d8fff;
+  --white:  #fff;
+  --dim:    rgba(255,255,255,.55);
+  --dimmer: rgba(255,255,255,.28);
+}
+
+html,body{height:100%;overflow-x:hidden}
+body{
+  font-family:'Noto Sans',sans-serif;
+  background:var(--navy);
+  color:var(--white);
+  cursor:default;
+}
+
+/* ── STARFIELD CANVAS ── */
+#stars{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;
+}
+
+/* ── PAGE LAYOUT ── */
+.page{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+
+/* ── HEADER ── */
+header{
+  padding:28px 48px 0;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo-mark{
+  display:flex;align-items:center;gap:10px;
+  font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);
+}
+.logo-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 8px var(--orange);
+}
+.header-tag{
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dimmer);font-weight:400;
+}
+
+/* ── HERO TEXT ── */
+.hero-text{
+  text-align:center;padding:36px 24px 0;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:14px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';display:block;width:28px;height:1px;
+  background:var(--orange);opacity:.7;
+}
+.hero-text h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:900;line-height:1.1;
+  letter-spacing:-.01em;
+}
+.hero-text h1 em{font-style:normal;color:var(--orange)}
+.hero-sub{
+  margin-top:10px;font-size:.9rem;
+  color:var(--dim);line-height:1.7;
+}
+
+/* ── WHEEL STAGE ── */
+.wheel-stage{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px 24px 0;
+  min-height:500px;
+}
+
+.wheel-wrap{
+  position:relative;
+  width:min(640px,90vw);
+  aspect-ratio:1;
+}
+
+/* SVG wheel */
+#wheelSvg{
+  width:100%;height:100%;
+  overflow:visible;
+}
+
+/* orbit rings */
+.orbit-ring{
+  fill:none;stroke:rgba(255,255,255,.06);stroke-width:1;
+}
+.orbit-ring.inner{stroke:rgba(234,136,0,.12);stroke-width:1.5}
+
+/* spokes (connector lines) */
+.spoke{
+  stroke:rgba(234,136,0,.2);stroke-width:1;
+  stroke-dasharray:4 4;
+  transition:stroke .3s,opacity .3s;
+}
+.spoke.active-spoke{stroke:rgba(234,136,0,.7);stroke-dasharray:none}
+
+/* center core */
+.core-ring-outer{fill:none;stroke:rgba(234,136,0,.3);stroke-width:1.5}
+.core-ring-inner{fill:none;stroke:rgba(234,136,0,.5);stroke-width:1}
+.core-fill{fill:var(--navy3)}
+.core-glow{fill:rgba(234,136,0,.08)}
+
+/* planet nodes */
+.planet-group{cursor:pointer}
+.planet-orbit-ghost{fill:none;stroke:rgba(234,136,0,.08);stroke-width:12;transition:stroke .3s}
+.planet-orbit-ghost:hover,.planet-orbit-ghost.hovered{stroke:rgba(234,136,0,.18)}
+
+.planet-circle{
+  transition:r .25s,fill .25s,stroke-width .25s;
+  filter:drop-shadow(0 0 6px rgba(234,136,0,.0));
+}
+.planet-group:hover .planet-circle,
+.planet-group.active .planet-circle{
+  filter:drop-shadow(0 0 10px rgba(234,136,0,.7));
+}
+.planet-group.active .planet-circle{stroke-width:2.5!important}
+
+.planet-pulse{
+  fill:none;stroke:rgba(234,136,0,.5);stroke-width:1;
+  opacity:0;
+  transform-origin:center;
+}
+.planet-group.active .planet-pulse{
+  animation:pulse-ring 1.8s ease-out infinite;
+}
+@keyframes pulse-ring{
+  0%{r:18;opacity:.6}
+  100%{r:32;opacity:0}
+}
+
+/* year label on planet */
+.planet-year{
+  font-size:9px;font-weight:700;
+  fill:white;text-anchor:middle;dominant-baseline:central;
+  pointer-events:none;
+  letter-spacing:.05em;
+}
+
+/* floating year label outside planet */
+.float-label{
+  font-size:11px;font-weight:700;fill:var(--orange);
+  text-anchor:middle;dominant-baseline:central;
+  pointer-events:none;letter-spacing:.08em;
+}
+
+/* ── DETAIL PANEL ── */
+.detail-panel{
+  position:relative;z-index:2;
+  max-width:900px;margin:0 auto;
+  padding:20px 24px 50px;
+  min-height:220px;
+}
+
+.detail-inner{
+  background:rgba(255,255,255,.03);
+  border:0.5px solid rgba(234,136,0,.2);
+  border-radius:20px;
+  padding:32px 40px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;
+  position:relative;overflow:hidden;
+  transition:opacity .3s,transform .3s;
+  opacity:0;transform:translateY(12px);
+}
+.detail-inner.visible{opacity:1;transform:translateY(0)}
+
+/* top accent */
+.detail-inner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--orange),var(--blue),transparent);
+}
+
+.detail-year-big{
+  font-family:'Playfair Display',serif;
+  font-size:4rem;font-weight:900;
+  color:var(--orange);line-height:1;
+  opacity:.18;
+  position:absolute;right:32px;top:24px;
+  pointer-events:none;letter-spacing:-.02em;
+}
+
+.detail-col-title{
+  font-size:.65rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--orange);
+  margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.detail-col-title::before{
+  content:'';display:block;width:16px;height:1.5px;
+  background:var(--orange);flex-shrink:0;
+}
+.detail-main-title{
+  font-size:1.15rem;font-weight:700;line-height:1.3;
+  margin-bottom:10px;
+}
+.detail-desc{
+  font-size:.82rem;color:var(--dim);line-height:1.65;
+}
+.detail-tag{
+  display:inline-block;margin-top:12px;
+  font-size:.62rem;font-weight:700;letter-spacing:.06em;
+  padding:3px 10px;border-radius:99px;
+  background:rgba(234,136,0,.12);
+  border:0.5px solid rgba(234,136,0,.3);
+  color:var(--orangeL);
+}
+
+.detail-stat{
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:center;
+  border-left:1px solid rgba(255,255,255,.08);
+  padding-left:32px;
+}
+.detail-stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem;font-weight:900;
+  color:var(--orange);line-height:1;
+}
+.detail-stat-label{
+  font-size:.72rem;color:var(--dim);
+  margin-top:4px;line-height:1.4;
+}
+
+.detail-meta{
+  border-left:1px solid rgba(255,255,255,.08);
+  padding-left:32px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.meta-row{display:flex;flex-direction:column;gap:2px}
+.meta-row-label{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
+.meta-row-val{font-size:.82rem;color:var(--white);font-weight:600}
+
+/* hint text when nothing selected */
+.hint-text{
+  text-align:center;padding:40px 0;
+  font-size:.85rem;color:var(--dimmer);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  transition:opacity .3s;
+}
+.hint-text svg{opacity:.3}
+
+/* ── ORBIT DOTS (decorative) ── */
+@keyframes orbit-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes orbit-rev{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes slow-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.dec-orbit{
+  position:absolute;border-radius:50%;
+  pointer-events:none;
+}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:20px 24px;
+  font-size:.7rem;color:var(--dimmer);
+  letter-spacing:.06em;
+  border-top:1px solid rgba(255,255,255,.04);
+  position:relative;z-index:2;
+}
+footer span{color:var(--orange)}
+
+/* ── NAV DOTS ── */
+.orbit-nav{
+  position:relative;z-index:2;
+  display:flex;justify-content:center;gap:8px;
+  padding:0 0 16px;
+}
+.onav-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.2);
+  cursor:pointer;transition:background .2s,transform .2s;
+  border:none;padding:0;
+}
+.onav-dot.active{background:var(--orange);transform:scale(1.4)}
+
+/* ── INTRO ANIMATION ── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.anim-in{opacity:0;animation:fadeInUp .7s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="page">
+
+  <!-- Header -->
+  <header class="anim-in">
+    <div class="logo-mark">
+      <img src="uvnslogo.png" alt="UVNS Services" style="height:32px;vertical-align:middle;margin-right:6px;">
+      <div class="logo-dot"></div>
+      UVNS Services
+    </div>
+    <div style="display:flex;align-items:center;gap:18px;">
+      <a href="index.html" style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;font-weight:600;transition:color .2s;" onmouseover="this.style.color='#EA8800'" onmouseout="this.style.color='rgba(255,255,255,.45)'"><i class="fas fa-home" style="margin-right:5px;"></i>Home</a>
+      <a href="about.html" style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;font-weight:600;transition:color .2s;" onmouseover="this.style.color='#EA8800'" onmouseout="this.style.color='rgba(255,255,255,.45)'"><i class="fas fa-info-circle" style="margin-right:5px;"></i>About</a>
+      <div class="header-tag">History &amp; Milestones</div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero-text anim-in d1">
+    <div class="hero-eyebrow"><span></span>A Decade of Excellence<span></span></div>
+    <h1>Our Journey Through <em>Time</em></h1>
+    <p class="hero-sub">Click any year to explore that chapter of our story.</p>
+  </div>
+
+  <!-- Wheel -->
+  <div class="wheel-stage anim-in d2">
+    <div class="wheel-wrap">
+      <svg id="wheelSvg" viewBox="-320 -320 640 640" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1a3060"/>
+            <stop offset="100%" stop-color="#0a1628"/>
+          </radialGradient>
+          <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(234,136,0,.22)"/>
+            <stop offset="100%" stop-color="rgba(234,136,0,0)"/>
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="softglow">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Background glow -->
+        <circle cx="0" cy="0" r="260" fill="url(#glowGrad)" opacity=".4"/>
+
+        <!-- Orbit rings -->
+        <circle class="orbit-ring" cx="0" cy="0" r="240"/>
+        <circle class="orbit-ring" cx="0" cy="0" r="180"/>
+        <circle class="orbit-ring inner" cx="0" cy="0" r="120"/>
+        <circle class="orbit-ring" cx="0" cy="0" r="60" opacity=".4"/>
+
+        <!-- Tick marks on outer ring -->
+        <g id="tickMarks"></g>
+
+        <!-- Spoke lines (drawn by JS) -->
+        <g id="spokes"></g>
+
+        <!-- Planet groups (drawn by JS) -->
+        <g id="planets"></g>
+
+        <!-- Center core -->
+        <circle cx="0" cy="0" r="58" fill="url(#coreGrad)"/>
+        <circle class="core-ring-outer" cx="0" cy="0" r="58"/>
+        <circle class="core-ring-inner" cx="0" cy="0" r="50"/>
+        <!-- Legal scales icon -->
+        <g fill="none" stroke="rgba(234,136,0,.8)" stroke-width="1.4" stroke-linecap="round">
+          <circle cx="0" cy="-26" r="3" fill="rgba(234,136,0,.8)" stroke="none"/>
+          <line x1="0" y1="-23" x2="0" y2="22"/>
+          <line x1="-18" y1="-10" x2="18" y2="-10"/>
+          <line x1="-18" y1="-10" x2="-26" y2="6"/>
+          <line x1="-26" y1="6" x2="-10" y2="6"/>
+          <path d="M-26 6 Q-18 12 -10 6" stroke="rgba(234,136,0,.6)"/>
+          <line x1="18" y1="-10" x2="10" y2="6"/>
+          <line x1="10" y1="6" x2="26" y2="6"/>
+          <path d="M10 6 Q18 12 26 6" stroke="rgba(234,136,0,.6)"/>
+          <line x1="-8" y1="22" x2="8" y2="22"/>
+        </g>
+        <!-- UVNS text -->
+        <text x="0" y="38" text-anchor="middle" font-family="'Noto Sans'" font-size="7.5" font-weight="800" fill="rgba(234,136,0,.9)" letter-spacing="2">UVNS</text>
+
+      </svg>
+    </div>
+  </div>
+
+  <!-- Nav dots -->
+  <div class="orbit-nav anim-in d3" id="orbitNav"></div>
+
+  <!-- Detail panel -->
+  <div class="detail-panel anim-in d4">
+    <div id="hintText" class="hint-text">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="white"/>
+      </svg>
+      Select a year from the orbit wheel to explore that milestone
+    </div>
+    <div id="detailInner" class="detail-inner">
+      <div>
+        <div class="detail-col-title" id="dColTitle">Milestone</div>
+        <div class="detail-main-title" id="dTitle">—</div>
+        <div class="detail-desc" id="dDesc">—</div>
+        <span class="detail-tag" id="dTag">—</span>
+      </div>
+      <div class="detail-stat">
+        <div class="detail-stat-num" id="dStatNum">—</div>
+        <div class="detail-stat-label" id="dStatLabel">—</div>
+      </div>
+      <div class="detail-meta">
+        <div class="meta-row">
+          <div class="meta-row-label">Era</div>
+          <div class="meta-row-val" id="dEra">—</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-row-label">Category</div>
+          <div class="meta-row-val" id="dCat">—</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-row-label">Impact</div>
+          <div class="meta-row-val" id="dImpact">—</div>
+        </div>
+      </div>
+      <div class="detail-year-big" id="dYearBig">—</div>
+    </div>
+  </div>
+
+  <footer>
+    <span>UVNS Services</span> — Precision Legal Outsourcing since 2013
+  </footer>
+
+</div>
+
+<script>
+/* ══ STARFIELD ══════════════════════════════════════════════════ */
+(function(){
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){
+    W=c.width=innerWidth;H=c.height=innerHeight;
+    stars=[];
+    for(let i=0;i<180;i++){
+      stars.push({
+        x:Math.random()*W, y:Math.random()*H,
+        r:Math.random()*.9+.1,
+        a:Math.random(),
+        speed:Math.random()*.003+.001
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a += s.speed;
+      const alpha = (Math.sin(s.a)*.5+.5)*.7+.05;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize(); draw();
+})();
+
+/* ══ MILESTONES DATA ════════════════════════════════════════════ */
+const milestones = [
+  {
+    year:'2013', angle:-90,
+    title:'Company Founded',
+    colTitle:'The Beginning',
+    desc:'UVNS Services was born from a clear gap in the market — law firms needed precision documentation support they could rely on. We launched with a focused mission: accuracy-first legal outsourcing for personal injury practices.',
+    tag:'Foundation',
+    statNum:'1', statLabel:'team, one mission,\ninfinite potential',
+    era:'Founding Era', cat:'Company Formation', impact:'High',
+    color:'#EA8800', size:22
+  },
+  {
+    year:'2015', angle:-25,
+    title:'Medical Records Review Launched',
+    colTitle:'Service Expansion',
+    desc:'We expanded our capabilities to include full medical records review and summary preparation — services that directly strengthen case files. This became the cornerstone of our offering to personal injury law firms.',
+    tag:'Service Expansion',
+    statNum:'3', statLabel:'new core services\nadded in one year',
+    era:'Growth Era', cat:'Service Launch', impact:'Very High',
+    color:'#135BEC', size:20
+  },
+  {
+    year:'2017', angle:35,
+    title:'500+ Cases Milestone',
+    colTitle:'First Major Milestone',
+    desc:'Crossing 500 completed cases validated everything we built. Mid-size personal injury firms began returning for repeat work — a clear signal that our quality-first model was working and building real trust.',
+    tag:'Milestone',
+    statNum:'500+', statLabel:'cases completed\nwith 100% accuracy',
+    era:'Growth Era', cat:'Volume Milestone', impact:'High',
+    color:'#EA8800', size:20
+  },
+  {
+    year:'2018', angle:80,
+    title:'Team Grows to 20+ Experts',
+    colTitle:'Team Scale-Up',
+    desc:'We onboarded certified legal professionals and trained paralegals, building a team structure that allowed us to take on higher case volumes without compromising on turnaround time or documentation quality.',
+    tag:'Team Growth',
+    statNum:'20+', statLabel:'certified legal\nprofessionals on team',
+    era:'Growth Era', cat:'Operations', impact:'High',
+    color:'#135BEC', size:19
+  },
+  {
+    year:'2020', angle:140,
+    title:'Fully Remote & Digital',
+    colTitle:'Digital Transformation',
+    desc:'We transitioned to a completely secure, fully digital workflow. What could have been a disruption became our greatest operational strength — enabling seamless collaboration with law firms across the country with zero delivery delays.',
+    tag:'Operations',
+    statNum:'0', statLabel:'days of disruption\nduring transition',
+    era:'Transformation Era', cat:'Digital Operations', impact:'Critical',
+    color:'#EA8800', size:19
+  },
+  {
+    year:'2021', angle:185,
+    title:"Workers' Comp Practice",
+    colTitle:'New Practice Area',
+    desc:"We extended our expertise into workers' compensation — a natural expansion that leveraged our documentation precision. Claim file indexing and chronology services opened a new segment of legal clients.",
+    tag:'New Practice',
+    statNum:'2', statLabel:'practice areas\nnow fully served',
+    era:'Expansion Era', cat:'Service Expansion', impact:'High',
+    color:'#135BEC', size:20
+  },
+  {
+    year:'2022', angle:230,
+    title:'2,000+ Cases Completed',
+    colTitle:'Scale Milestone',
+    desc:'Surpassing 2,000 total case files cemented our position in the legal outsourcing market. Every case handled with 100% confidentiality, precision documentation and on-time delivery — no exceptions.',
+    tag:'Milestone',
+    statNum:'2K+', statLabel:'cases completed\nwith full confidentiality',
+    era:'Scale Era', cat:'Volume Milestone', impact:'Very High',
+    color:'#EA8800', size:21
+  },
+  {
+    year:'2024', angle:270,
+    title:'5,000+ Cases & Still Growing',
+    colTitle:'Present Day',
+    desc:'A full decade of trusted legal outsourcing. Over 5,000 case files processed, a team of 20+ legal experts, six core service lines — and a future still being written. UVNS is just getting started.',
+    tag:'Today',
+    statNum:'5K+', statLabel:'cases and a decade\nof trusted partnerships',
+    era:'Present Day', cat:'Milestone + Ongoing', impact:'Transformative',
+    color:'#FF9E1B', size:26
+  }
+];
+
+/* ══ ORBIT RADII ════════════════════════════════════════════════ */
+const R_INNER = 120;
+const R_OUTER = 210;
+// Alternate inner/outer for visual rhythm
+const radii = [R_OUTER,R_INNER,R_OUTER,R_INNER,R_OUTER,R_INNER,R_OUTER,R_INNER];
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('wheelSvg');
+const spokesG = document.getElementById('spokes');
+const planetsG = document.getElementById('planets');
+const ticksG   = document.getElementById('tickMarks');
+
+let activeIdx = -1;
+
+/* ── tick marks on outer ring ── */
+for(let i=0;i<72;i++){
+  const a = (i/72)*Math.PI*2;
+  const r1=238, r2 = i%9===0 ? 230 : 234;
+  const x1=Math.cos(a)*r1, y1=Math.sin(a)*r1;
+  const x2=Math.cos(a)*r2, y2=Math.sin(a)*r2;
+  const ln = document.createElementNS(SVG_NS,'line');
+  ln.setAttribute('x1',x1);ln.setAttribute('y1',y1);
+  ln.setAttribute('x2',x2);ln.setAttribute('y2',y2);
+  ln.setAttribute('stroke',`rgba(255,255,255,${i%9===0?.15:.06})`);
+  ln.setAttribute('stroke-width','1');
+  ticksG.appendChild(ln);
+}
+
+/* ── build planets + spokes ── */
+milestones.forEach((m,i)=>{
+  const rad = radii[i];
+  const a = (m.angle * Math.PI)/180;
+  const cx = Math.cos(a)*rad;
+  const cy = Math.sin(a)*rad;
+
+  /* spoke */
+  const sp = document.createElementNS(SVG_NS,'line');
+  sp.setAttribute('x1','0');sp.setAttribute('y1','0');
+  sp.setAttribute('x2',cx);sp.setAttribute('y2',cy);
+  sp.setAttribute('class','spoke');
+  sp.setAttribute('id','spoke'+i);
+  spokesG.appendChild(sp);
+
+  /* planet group */
+  const g = document.createElementNS(SVG_NS,'g');
+  g.setAttribute('class','planet-group');
+  g.setAttribute('id','planet'+i);
+  g.setAttribute('transform',`translate(${cx},${cy})`);
+
+  /* hit area ghost */
+  const ghost = document.createElementNS(SVG_NS,'circle');
+  ghost.setAttribute('cx','0');ghost.setAttribute('cy','0');
+  ghost.setAttribute('r','28');
+  ghost.setAttribute('class','planet-orbit-ghost');
+  ghost.setAttribute('id','ghost'+i);
+
+  /* pulse ring */
+  const pulse = document.createElementNS(SVG_NS,'circle');
+  pulse.setAttribute('cx','0');pulse.setAttribute('cy','0');
+  pulse.setAttribute('r','18');
+  pulse.setAttribute('class','planet-pulse');
+  pulse.setAttribute('fill','none');
+  pulse.setAttribute('stroke',m.color);
+
+  /* main circle */
+  const circle = document.createElementNS(SVG_NS,'circle');
+  circle.setAttribute('cx','0');circle.setAttribute('cy','0');
+  circle.setAttribute('r',m.size);
+  circle.setAttribute('class','planet-circle');
+  circle.setAttribute('fill',m.year==='2024'
+    ? 'rgba(234,136,0,.25)'
+    : i%2===0 ? 'rgba(234,136,0,.15)' : 'rgba(19,91,236,.15)');
+  circle.setAttribute('stroke',m.color);
+  circle.setAttribute('stroke-width', m.year==='2024'?'2':'1.5');
+
+  /* year label */
+  const label = document.createElementNS(SVG_NS,'text');
+  label.setAttribute('class','planet-year');
+  label.setAttribute('x','0');label.setAttribute('y','0');
+  label.setAttribute('fill','white');
+  label.textContent = m.year;
+
+  g.appendChild(ghost);
+  g.appendChild(pulse);
+  g.appendChild(circle);
+  g.appendChild(label);
+
+  /* floating label: short title tag outside planet */
+  const ang2 = a;
+  const labelR = rad + m.size + 14;
+  const lx = Math.cos(ang2)*labelR;
+  const ly = Math.sin(ang2)*labelR;
+  const fl = document.createElementNS(SVG_NS,'text');
+  fl.setAttribute('class','float-label');
+  fl.setAttribute('x', lx);
+  fl.setAttribute('y', ly);
+  fl.setAttribute('fill','rgba(234,136,0,.55)');
+  fl.setAttribute('font-size','8');
+  fl.setAttribute('font-weight','700');
+  fl.setAttribute('font-family','Noto Sans');
+  fl.setAttribute('letter-spacing','1');
+  fl.setAttribute('text-anchor', cx > 10 ? 'start' : cx < -10 ? 'end' : 'middle');
+  fl.textContent = m.tag.toUpperCase();
+  svg.appendChild(fl);
+
+  g.addEventListener('click',()=>selectMilestone(i));
+  g.addEventListener('mouseenter',()=>hoverPlanet(i,true));
+  g.addEventListener('mouseleave',()=>hoverPlanet(i,false));
+
+  planetsG.appendChild(g);
+});
+
+/* 2024 gets extra outer glow ring */
+const lastM = milestones[7];
+const lastA = (lastM.angle*Math.PI)/180;
+const lastR = radii[7];
+const lx2 = Math.cos(lastA)*lastR, ly2 = Math.sin(lastA)*lastR;
+const glowR = document.createElementNS(SVG_NS,'circle');
+glowR.setAttribute('cx',lx2);glowR.setAttribute('cy',ly2);
+glowR.setAttribute('r','36');
+glowR.setAttribute('fill','none');
+glowR.setAttribute('stroke','rgba(255,158,27,.25)');
+glowR.setAttribute('stroke-width','1');
+planetsG.insertBefore(glowR, planetsG.firstChild);
+
+/* ── build nav dots ── */
+const nav = document.getElementById('orbitNav');
+milestones.forEach((_,i)=>{
+  const btn = document.createElement('button');
+  btn.className='onav-dot';
+  btn.addEventListener('click',()=>selectMilestone(i));
+  nav.appendChild(btn);
+});
+
+/* ── hover ── */
+function hoverPlanet(i,on){
+  const ghost = document.getElementById('ghost'+i);
+  if(ghost) ghost.classList.toggle('hovered',on);
+}
+
+/* ── select milestone ── */
+const detailInner = document.getElementById('detailInner');
+const hintText    = document.getElementById('hintText');
+
+function selectMilestone(i){
+  /* deactivate previous */
+  if(activeIdx>=0){
+    document.getElementById('planet'+activeIdx)?.classList.remove('active');
+    document.getElementById('spoke'+activeIdx)?.classList.remove('active-spoke');
+    nav.children[activeIdx]?.classList.remove('active');
+  }
+
+  /* same click = toggle off */
+  if(activeIdx===i){ activeIdx=-1; hideDetail(); return; }
+
+  activeIdx=i;
+  const m=milestones[i];
+
+  document.getElementById('planet'+i)?.classList.add('active');
+  document.getElementById('spoke'+i)?.classList.add('active-spoke');
+  nav.children[i]?.classList.add('active');
+
+  /* fill detail */
+  document.getElementById('dColTitle').textContent = m.colTitle;
+  document.getElementById('dTitle').textContent    = m.title;
+  document.getElementById('dDesc').textContent     = m.desc;
+  document.getElementById('dTag').textContent      = m.tag;
+  document.getElementById('dStatNum').textContent  = m.statNum;
+  document.getElementById('dStatLabel').textContent= m.statLabel;
+  document.getElementById('dEra').textContent      = m.era;
+  document.getElementById('dCat').textContent      = m.cat;
+  document.getElementById('dImpact').textContent   = m.impact;
+  document.getElementById('dYearBig').textContent  = m.year;
+
+  /* accent color */
+  detailInner.style.borderColor = m.color+'44';
+  document.getElementById('dStatNum').style.color  = m.color;
+  document.getElementById('dYearBig').style.color  = m.color;
+
+  hintText.style.display='none';
+  detailInner.classList.add('visible');
+}
+
+function hideDetail(){
+  detailInner.classList.remove('visible');
+  hintText.style.display='flex';
+}
+
+/* ── subtle slow rotation of planet groups ── */
+let rotAngle=0;
+const innerPlanets  = [1,3,5,7]; /* alternate inner ring — rotate opposite */
+const outerPlanets  = [0,2,4,6];
+
+(function rotateLoop(){
+  rotAngle += 0.015; /* degrees per frame */
+  milestones.forEach((m,i)=>{
+    if(activeIdx===i) return; /* freeze active planet */
+    const rad = radii[i];
+    const dir = innerPlanets.includes(i) ? -1 : 1;
+    const baseAngle = m.angle + rotAngle*dir * (innerPlanets.includes(i) ? 0.6 : 1);
+    const a = (baseAngle*Math.PI)/180;
+    const cx = Math.cos(a)*rad;
+    const cy = Math.sin(a)*rad;
+    const g = document.getElementById('planet'+i);
+    if(g) g.setAttribute('transform',`translate(${cx},${cy})`);
+    const sp = document.getElementById('spoke'+i);
+    if(sp){sp.setAttribute('x2',cx);sp.setAttribute('y2',cy)}
+    /* update float label */
+    const labelR = rad + milestones[i].size + 14;
+    const lx3 = Math.cos(a)*labelR;
+    const ly3 = Math.sin(a)*labelR;
+    const fl = svg.querySelectorAll('.float-label')[i];
+    if(fl){
+      fl.setAttribute('x',lx3);fl.setAttribute('y',ly3);
+      fl.setAttribute('text-anchor', cx > 10 ? 'start' : cx < -10 ? 'end' : 'middle');
+    }
+  });
+  requestAnimationFrame(rotateLoop);
+})();
+
+/* auto-select first on load */
+setTimeout(()=>selectMilestone(0), 900);
+</script>
+</body>
+</html>

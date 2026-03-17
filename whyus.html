@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Why Choose UVNS — UVNS Services</title>
+
+    <link rel="stylesheet" href="bootstarp.min.css">
+    <link rel="stylesheet" href="owl.carousel.min.css">
+    <link rel="stylesheet" href="animate.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="accessibility-controls.css">
+    <link rel="stylesheet" href="material-symbols-outlined.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+
+    <style>
+        /* ══════════════════════════════════════════
+           WHY US PAGE — Deep Amber / Gold Theme
+        ══════════════════════════════════════════ */
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            background: #0F172A;
+            padding: 20px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(245,158,11,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245,158,11,.05) 1px, transparent 1px);
+            background-size: 52px 52px;
+        }
+        .page-hero::after {
+            content: ''; position: absolute;
+            right: -80px; top: -80px;
+            width: 520px; height: 520px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,158,11,.2) 0%, transparent 68%);
+            pointer-events: none;
+        }
+        .hero-glow-left {
+            position: absolute;
+            left: -100px; bottom: -100px;
+            width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(251,191,36,.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .page-hero-inner { position: relative; z-index: 2; }
+
+        .breadcrumb-wrap {
+            display: flex; align-items: center; gap: 8px;
+            font-size: .8rem; color: rgba(255,255,255,.5);
+            margin-bottom: 18px;
+        }
+        .breadcrumb-wrap a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+        .breadcrumb-wrap a:hover { color: #F5A623; }
+        .breadcrumb-wrap span { color: #F5A623; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(245,158,11,.14);
+            border: 1px solid rgba(245,158,11,.38);
+            border-radius: 99px; padding: 6px 18px;
+            font-size: .7rem; font-weight: 700;
+            letter-spacing: .14em; text-transform: uppercase;
+            color: #F5A623; margin-bottom: 18px;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+            font-weight: 800; color: #fff; line-height: 1.12; margin-bottom: 14px;
+        }
+        .page-hero h1 em { font-style: normal; color: #EA8800; }
+        .page-hero p {
+            font-size: .95rem; color: rgba(255,255,255,.6);
+            max-width: 560px; line-height: 1.75; margin-bottom: 28px;
+        }
+
+        /* hero trust badge row */
+        .trust-badges {
+            display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px;
+        }
+        .trust-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 8px; padding: 8px 14px;
+            font-size: .78rem; color: rgba(255,255,255,.8); font-weight: 600;
+        }
+        .trust-badge i { color: #EA8800; font-size: .78rem; }
+
+        /* ── SECTION HELPERS ── */
+        .title-s {
+            font-size: .7rem; font-weight: 700;
+            letter-spacing: .16em; text-transform: uppercase;
+            color: #EA8800;
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 10px;
+        }
+        .title-s::before {
+            content: ''; display: block;
+            width: 22px; height: 2px;
+            background: #EA8800;
+        }
+        .section-title {
+            font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+            font-weight: 800; line-height: 1.2; color: #0F172A;
+        }
+        .section-title span { color: #EA8800; }
+        .section-sub {
+            font-size: .9rem; color: #666; max-width: 560px;
+            line-height: 1.75; margin-top: 10px;
+        }
+
+        /* ── HEADLINE STATS BAND ── */
+        .stats-band {
+            background: #fff;
+            border-bottom: 1px solid #e8f0fe;
+            padding: 44px 0;
+        }
+        .stats-band-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+        }
+        .stat-item {
+            text-align: center; padding: 20px 16px;
+            border-right: 1px solid #e8f0fe;
+            position: relative;
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-item::before {
+            content: ''; position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 36px; height: 3px;
+            background: #135BEC;
+            border-radius: 2px 2px 0 0;
+        }
+        .stat-item .num {
+            font-size: 2rem; font-weight: 800; color: #EA8800; line-height: 1;
+        }
+        .stat-item .lbl {
+            font-size: .74rem; color: #888;
+            margin-top: 5px; letter-spacing: .04em;
+        }
+
+        /* ── WHY CARDS SECTION ── */
+        .why-cards-section {
+            padding: 88px 0;
+            background: #F3F6FE;
+        }
+
+        .why-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 28px;
+            height: 100%;
+            border: 1px solid rgba(245,158,11,.1);
+            position: relative; overflow: hidden;
+            transition: transform .25s, box-shadow .3s, border-color .25s;
+        }
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 48px rgba(245,158,11,.14);
+            border-color: rgba(245,158,11,.35);
+        }
+        .why-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, #135BEC, #EA8800);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s;
+        }
+        .why-card:hover::before { transform: scaleX(1); }
+
+        .why-card-num {
+            position: absolute; top: 20px; right: 20px;
+            font-size: 3.5rem; font-weight: 800;
+            color: rgba(245,158,11,.07); line-height: 1;
+            pointer-events: none;
+        }
+
+        .why-card-icon {
+            width: 54px; height: 54px;
+            border-radius: 14px;
+            background: #e8f0fe;
+            border: 1px solid rgba(245,158,11,.22);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+        }
+        .why-card-icon i { color: #EA8800; font-size: 22px; }
+
+        .why-card h5 {
+            font-size: 1rem; font-weight: 800; color: #0F172A;
+            margin-bottom: 10px; line-height: 1.3;
+        }
+        .why-card p {
+            font-size: .83rem; color: #666; line-height: 1.72; margin: 0;
+        }
+        .why-card-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 18px;
+            font-size: .8rem; font-weight: 700; color: #EA8800;
+            text-decoration: none;
+            transition: gap .2s;
+        }
+        .why-card-link:hover { gap: 10px; }
+
+        /* ── COMPARISON TABLE ── */
+        .compare-section {
+            padding: 88px 0;
+            background: #fff;
+        }
+        .compare-table-wrap {
+            margin-top: 48px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(245,158,11,.15);
+            box-shadow: 0 8px 40px rgba(0,0,0,.06);
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .compare-table th {
+            padding: 18px 24px;
+            font-size: .78rem; font-weight: 700;
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+        .compare-table th:first-child {
+            background: #F3F6FE; color: #888;
+            text-align: left; width: 38%;
+        }
+        .compare-table th:nth-child(2) {
+            background: #0F172A; color: rgba(255,255,255,.7);
+            text-align: center;
+        }
+        .compare-table th:last-child {
+            background: #135BEC; color: #fff;
+            text-align: center; position: relative;
+        }
+        .compare-table th:last-child::after {
+            content: '✦ Recommended';
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            background: #EA8800; color: #fff;
+            font-size: .6rem; font-weight: 800; letter-spacing: .1em;
+            padding: 3px 10px; border-radius: 99px; white-space: nowrap;
+        }
+
+        .compare-table td {
+            padding: 16px 24px;
+            font-size: .84rem; border-bottom: 1px solid #e8f0fe;
+        }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table td:first-child {
+            color: #444; font-weight: 600; background: #F3F6FE;
+        }
+        .compare-table td:nth-child(2) {
+            text-align: center; color: #999; background: #FAFAFA;
+        }
+        .compare-table td:last-child {
+            text-align: center; background: #F3F6FE;
+            font-weight: 700; color: #EA8800;
+        }
+        .compare-table td.no { color: #ccc; }
+        .compare-table td.yes { color: #059669; font-weight: 700; }
+        .check-icon { color: #059669; font-size: 1rem; }
+        .cross-icon { color: #FDA99A; font-size: 1rem; }
+
+        /* ── TESTIMONIALS SECTION ── */
+        .testimonials-section {
+            padding: 88px 0;
+            background: #F3F6FE;
+        }
+        .testi-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 32px 28px;
+            border: 1px solid rgba(245,158,11,.1);
+            height: 100%;
+            position: relative;
+            transition: box-shadow .25s, transform .25s;
+        }
+        .testi-card:hover {
+            box-shadow: 0 16px 40px rgba(245,158,11,.12);
+            transform: translateY(-4px);
+        }
+        .testi-quote {
+            font-size: 2.5rem; line-height: 1;
+            color: #135BEC; margin-bottom: 14px;
+            font-family: Georgia, serif;
+        }
+        .testi-card p {
+            font-size: .86rem; color: #555;
+            line-height: 1.75; font-style: italic;
+            margin-bottom: 22px;
+        }
+        .testi-stars {
+            display: flex; gap: 3px; margin-bottom: 16px;
+        }
+        .testi-stars i { color: #135BEC; font-size: .75rem; }
+        .testi-author {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .testi-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, #0F172A, #1E293B);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .88rem; font-weight: 800;
+            color: rgba(255,255,255,.3); flex-shrink: 0;
+            border: 2px solid rgba(245,158,11,.3);
+        }
+        .testi-name {
+            font-size: .88rem; font-weight: 700; color: #0F172A;
+        }
+        .testi-role {
+            font-size: .74rem; color: #EA8800; margin-top: 1px;
+        }
+
+        /* ── PILLARS SECTION (dark) ── */
+        .pillars-section {
+            padding: 88px 0;
+            background: #0F172A;
+            position: relative; overflow: hidden;
+        }
+        .pillars-section::before {
+            content: ''; position: absolute;
+            left: -100px; bottom: -100px;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(251,191,36,.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .pillar-item {
+            display: flex; gap: 18px; align-items: flex-start;
+            padding: 22px 20px;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 16px;
+            margin-bottom: 14px;
+            transition: background .2s, border-color .2s;
+        }
+        .pillar-item:last-child { margin-bottom: 0; }
+        .pillar-item:hover {
+            background: rgba(245,158,11,.07);
+            border-color: rgba(245,158,11,.28);
+        }
+        .pillar-num {
+            width: 36px; height: 36px; flex-shrink: 0;
+            border-radius: 9px;
+            background: rgba(245,158,11,.15);
+            border: 1px solid rgba(245,158,11,.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .7rem; font-weight: 800; color: #EA8800;
+        }
+        .pillar-item h6 {
+            font-size: .92rem; font-weight: 700; color: #fff; margin-bottom: 5px;
+        }
+        .pillar-item p {
+            font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.65; margin: 0;
+        }
+
+        /* right side image block */
+        .pillar-img-block {
+            border-radius: 20px; overflow: hidden;
+            position: relative;
+        }
+        .pillar-img-block img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .pillar-img-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(28,16,7,.7) 100%);
+        }
+        .pillar-img-badge {
+            position: absolute; bottom: 24px; left: 24px; right: 24px;
+            background: rgba(245,158,11,.15);
+            border: 1px solid rgba(245,158,11,.35);
+            backdrop-filter: blur(8px);
+            border-radius: 12px; padding: 16px 18px;
+        }
+        .pillar-img-badge h6 { color: #EA8800; font-size: .88rem; font-weight: 800; margin-bottom: 4px; }
+        .pillar-img-badge p { color: rgba(255,255,255,.65); font-size: .76rem; line-height: 1.5; margin: 0; }
+
+        /* ── FAQ ── */
+        .faq-section {
+            padding: 88px 0; background: #fff;
+        }
+        .faq-accordion .accordion-item {
+            border: 1px solid rgba(245,158,11,.15) !important;
+            border-radius: 12px !important;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .faq-accordion .accordion-button {
+            font-size: .9rem; font-weight: 700; color: #0F172A;
+            background: #F3F6FE !important;
+            box-shadow: none !important;
+        }
+        .faq-accordion .accordion-button:not(.collapsed) {
+            color: #EA8800 !important;
+            background: #e8f0fe !important;
+        }
+        .faq-accordion .accordion-button::after {
+            filter: sepia(1) saturate(4) hue-rotate(5deg) !important;
+        }
+        .faq-accordion .accordion-body {
+            font-size: .84rem; color: #666; line-height: 1.72;
+            background: #fff; padding: 16px 20px;
+        }
+
+        /* ── PILOT CTA SECTION ── */
+        .pilot-cta {
+            padding: 88px 0;
+            background: linear-gradient(135deg, #0F172A 0%, #0d44b8 100%);
+            position: relative; overflow: hidden;
+            text-align: center;
+        }
+        .pilot-cta::before {
+            content: ''; position: absolute;
+            top: -100px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,158,11,.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .pilot-cta-inner { position: relative; z-index: 2; }
+        .pilot-cta .title-s { justify-content: center; color: #EA8800; }
+        .pilot-cta .title-s::before { background: #EA8800; }
+        .pilot-cta h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+            font-weight: 800; color: #fff; margin-bottom: 14px;
+        }
+        .pilot-cta h2 span { color: #EA8800; }
+        .pilot-cta p {
+            font-size: .92rem; color: rgba(255,255,255,.65);
+            max-width: 500px; margin: 0 auto 32px; line-height: 1.75;
+        }
+
+        /* pilot feature row */
+        .pilot-features {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+            margin-bottom: 32px;
+        }
+        .pilot-feat {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 8px; padding: 8px 16px;
+            font-size: .78rem; color: rgba(255,255,255,.85); font-weight: 600;
+        }
+        .pilot-feat i { color: #EA8800; font-size: .8rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 991px) {
+            .stats-band-grid { grid-template-columns: repeat(3, 1fr); }
+            .stat-item:nth-child(3) { border-right: none; }
+        }
+        @media (max-width: 767px) {
+            .stats-band-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
+            .compare-table-wrap { overflow-x: auto; }
+            .compare-table { min-width: 520px; }
+            .trust-badges { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── NAVBAR ── -->
+    <div class="top-header">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html"><img src="uvns-logo.png"  style="height:40px;"></a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                          <li class="nav-item"><a class="nav-link  " href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="whyus.html">Why Us</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item ms-3">
+                            <a class="btn quick-btn btn-pilot" href="contact.html">Start Free Pilot</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ── PAGE HERO ── -->
+    <section class="page-hero">
+        <div class="hero-glow-left"></div>
+        <div class="container page-hero-inner">
+            <div class="row align-items-center g-5">
+                <div class="col-12 col-lg-7">
+                    <div class="breadcrumb-wrap">
+                        <a href="index.html">Home</a>
+                        <i class="fas fa-chevron-right" style="font-size:.6rem"></i>
+                        <span>Why Us</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-trophy"></i>
+                        The UVNS Difference
+                    </div>
+                    <h1>Built on Accuracy,<br><em>Trusted by Law Firms</em></h1>
+                    <p>Over a decade of serving personal injury and workers' compensation practices with one unwavering commitment: documentation so precise, it changes outcomes. Here's why firms choose UVNS — and why they stay.</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="contact.html" class="btn quick-btn">Start Free Pilot</a>
+                        <a href="services.html" class="btn quick-btn btn-outline-light" style="color: #fff;">Explore Services</a>
+                    </div>
+                    <div class="trust-badges">
+                        <div class="trust-badge"><i class="fas fa-shield-alt"></i> 100% Confidential</div>
+                        <div class="trust-badge"><i class="fas fa-check-circle"></i> 98% Accuracy Rate</div> 
+                        <div class="trust-badge"><i class="fas fa-handshake"></i> Free Pilot — No Risk</div>
+                    </div>
+                </div>
+                <!-- Hero image -->
+                <div class="col-12 col-lg-5 d-none d-lg-block">
+                    <div style="position:relative;border-radius:20px;overflow:hidden;">
+                        <img src="uv&s-logo.svg" alt="UVNS Services — Trusted Legal Documentation" style="width:100%;object-fit:cover;border-radius:20px;display:block;">
+                        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(15,23,42,.8));border-radius:20px;"></div>
+                        <!-- floating badge -->
+                        <div style="position:absolute;top:20px;right:20px;background:linear-gradient(90deg,#EA8800,#135BEC);border-radius:12px;padding:12px 16px;text-align:center;">
+                            <div style="font-size:1.5rem;font-weight:800;color:#fff;line-height:1;">10+</div>
+                            <div style="font-size:.65rem;color:rgba(255,255,255,.85);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Years</div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- ── WHY CARDS ── -->
+    <section class="why-cards-section">
+        <div class="container">
+            <div class="row justify-content-between align-items-end mb-5">
+                <div class="col-lg-7">
+                    <div class="title-s">Why UVNS</div>
+                    <h2 class="section-title">Six Reasons Firms <span>Trust UVNS</span></h2>
+                    <p class="section-sub">Every point below reflects a real operational advantage that directly impacts your firm's capacity, quality, and bottom line.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+
+                <!-- Card 1 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="why-card">
+                        <div class="why-card-num">01</div>
+                        <div class="why-card-icon"><i class="fas fa-balance-scale"></i></div>
+                        <h5>Legal-Focused Expertise</h5>
+                        <p>Our team consists entirely of trained legal professionals who specialise in personal injury and workers' compensation. You're not outsourcing to a general BPO — you're working with a dedicated legal documentation unit that understands the stakes of every file.</p>
+                        <a href="about.html" class="why-card-link">Meet the team <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="why-card">
+                        <div class="why-card-num">02</div>
+                        <div class="why-card-icon"><i class="fas fa-bullseye"></i></div>
+                        <h5>Accuracy Without Compromise</h5>
+                        <p>In legal work, a single overlooked detail can change a case outcome. Every document we produce undergoes multi-stage quality checks — draft review, peer QC, and final sign-off — before it reaches you. We treat accuracy as non-negotiable, not aspirational.</p>
+                        <a href="services.html" class="why-card-link">Our QC process <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="why-card">
+                        <div class="why-card-num">03</div>
+                        <div class="why-card-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h5>Faster Turnaround, Greater Control</h5>
+                        <p>Standard delivery within 48 hours. Rush turnaround available on request. You always know exactly when to expect your files — no follow-up needed, no status-chasing. Predictable delivery timelines help your team plan ahead and meet court deadlines with confidence.</p>
+                        <a href="contact.html" class="why-card-link">Discuss your timeline <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="why-card">
+                        <div class="why-card-num">04</div>
+                        <div class="why-card-icon"><i class="fas fa-coins"></i></div>
+                        <h5>Cost Efficiency with Measurable Value</h5>
+                        <p>Maintain the output of a full documentation team without the overhead of hiring, training, and managing in-house staff. Our model is designed to deliver maximum value per case — clear pricing, no hidden fees, and a cost structure that scales with your volume.</p>
+                        <a href="contact.html" class="why-card-link">Get a quote <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="why-card">
+                        <div class="why-card-num">05</div>
+                        <div class="why-card-icon"><i class="fas fa-lock"></i></div>
+                        <h5>Absolute Confidentiality &amp; Data Security</h5>
+                        <p>Every engagement begins with a signed NDA. All file transfers are encrypted. Case data is handled with the same level of discretion expected of your own in-house team — and deleted securely after project completion. No exceptions, no shortcuts.</p>
+                        <a href="contact.html" class="why-card-link">Review our protocols <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="why-card">
+                        <div class="why-card-num">06</div>
+                        <div class="why-card-icon"><i class="fas fa-handshake"></i></div>
+                        <h5>A True Partnership Model</h5>
+                        <p>We don't just process files — we integrate with your team's workflow. We adapt to your preferred delivery formats, communication style, and case management systems. Our goal is to feel like an extension of your firm, not a distant vendor.</p>
+                        <a href="contact.html" class="why-card-link">Start the conversation <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- ── TESTIMONIALS ── -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-7">
+                    <div class="title-s" style="justify-content:center;">Client Voices</div>
+                    <h2 class="section-title">What Law Firms <span>Say About Us</span></h2>
+                    <p class="section-sub" style="margin:10px auto 0;">Real experiences from attorneys and partners who trusted UVNS with their most critical work.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testi-card">
+                        <div class="testi-quote">"</div>
+                        <div class="testi-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>UVNS Services completely transformed our document review process. Their team is exceptionally thorough, secure, and always delivers ahead of schedule. It feels like having an elite in-house team without the overhead.</p>
+                        <div class="testi-author">
+                            <div class="testi-avatar">JD</div>
+                            <div>
+                                <div class="testi-name">Jonathan Davis</div>
+                                <div class="testi-role">Managing Partner · Davis &amp; Associates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testi-card">
+                        <div class="testi-quote">"</div>
+                        <div class="testi-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>Since partnering with UVNS Services, our document review workflow has become faster, more organised, and far more dependable. The value they bring rivals that of a seasoned internal department.</p>
+                        <div class="testi-author">
+                            <div class="testi-avatar">MG</div>
+                            <div>
+                                <div class="testi-name">Melissa Grant</div>
+                                <div class="testi-role">Senior Partner · Grant &amp; Hollis LLP</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testi-card">
+                        <div class="testi-quote">"</div>
+                        <div class="testi-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p>I was skeptical at first about outsourcing something so sensitive. The free pilot changed everything — the quality exceeded what our own team had been producing under deadline pressure. We've been clients for three years now.</p>
+                        <div class="testi-author">
+                            <div class="testi-avatar">RM</div>
+                            <div>
+                                <div class="testi-name">Robert Mitchell</div>
+                                <div class="testi-role">Director of Operations · Mitchell Group</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PILLARS SECTION ── -->
+    <section class="pillars-section">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="title-s" style="color:#EA8800;">Our Core Values</div>
+                    <h2 class="section-title" style="color:#fff;">The Principles <span style="color:#EA8800;">We Never Compromise On</span></h2>
+                    <p class="section-sub" style="color:rgba(255,255,255,.55);margin:10px 0 30px;">Every decision we make — from how we hire to how we deliver — is filtered through these four commitments.</p>
+
+                    <div class="pillar-item">
+                        <div class="pillar-num">01</div>
+                        <div>
+                            <h6>Accuracy is Non-Negotiable</h6>
+                            <p>We don't ship work that hasn't passed our full QC protocol. Speed is important — but it never comes at the cost of correctness.</p>
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-num">02</div>
+                        <div>
+                            <h6>Confidentiality is Absolute</h6>
+                            <p>Your client data and case files are handled with the same level of discretion as your own in-house team. Every engagement is covered by NDA.</p>
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-num">03</div>
+                        <div>
+                            <h6>Reliability is Our Product</h6>
+                            <p>Delivering consistently — on time, on format, on quality — is what defines a true partnership. We measure ourselves against your expectations, not ours.</p>
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-num">04</div>
+                        <div>
+                            <h6>Transparency Builds Trust</h6>
+                            <p>Clear pricing, honest timelines, and direct communication. No surprises, no hidden conditions. We operate as an extension of your firm — not a black box.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="pillar-img-block" style="height:520px;">
+                        <img src="trust.png" alt="Why UVNS — Our Values">
+                        <div class="pillar-img-overlay"></div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-7">
+                    <div class="title-s" style="justify-content:center;">FAQs</div>
+                    <h2 class="section-title">Common <span>Questions</span></h2>
+                    <p class="section-sub" style="margin:10px auto 0;">Everything you need to know before making a decision.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="accordion faq-accordion" id="faqAccordion">
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    What makes UVNS different from a general legal outsourcing company?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We specialise exclusively in personal injury and workers' compensation practices. Our team is made up of legal professionals trained specifically for these practice areas — not generalists handling a broad range of legal work. This focus means faster onboarding, fewer corrections, and work that reflects a genuine understanding of your caseload.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How does the free pilot work?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer one complimentary case file — reviewed and summarised at no cost — before any commitment is made. You send us a real case, we sign an NDA, and we deliver our full service within the standard turnaround. You evaluate the quality firsthand. No credit card, no contract, no obligation.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How do you ensure confidentiality?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We sign NDAs or firm-specific confidentiality agreements before any work begins. File transfers are encrypted via your preferred method. Case data is stored only for the duration of the project and securely deleted upon completion. Our team operates under the same non-disclosure obligations as in-house legal staff.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    What is your typical turnaround time?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Standard delivery is within 48 hours for most services. For larger or more complex case files, we'll agree on a timeline upfront so you always know what to expect. Rush delivery is available on request — just let us know your deadline when submitting.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Can I scale up or down based on caseload?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Absolutely. Our model is built for flexibility. You can send one case or a hundred — with no long-term retainers or minimum volume commitments. We scale with your caseload, absorbing fluctuation so your internal team can stay focused on what matters most.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    Do you work with small firms or solo practitioners?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes — in fact, smaller firms often benefit most from our services. Without a large internal team, solo practitioners and small practices can access the same documentation quality as large firms at a fraction of the overhead cost. We work with firms of all sizes.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer innerpage">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info mb-3">
+                        <ul class="foot-add">
+                            <li><i class="fas fa-map-marker-alt"></i>
+                                <div>First Floor, 5 Indus House, Connaught Place, Delhi - 110001</div>
+                            </li>
+                            <li><i class="fas fa-phone"></i><div>+91 9811298324</div></li>
+                            <li><i class="fas fa-envelope"></i><div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bf8f4f5effaf8efdbeeedf5e8e8fee9edf2f8fee8b5f8f4f6">[email&#160;protected]</a></div></li>
+                        </ul>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footlink">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="whyus.html">Why UVNS</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Services</h5>
+                    <ul class="footlink">
+                        <li><a href="services.html">Case Screening</a></li>
+                        <li><a href="services.html">Medical Records</a></li>
+                        <li><a href="services.html">Summary Prep</a></li>
+                        <li><a href="services.html">Document Drafting</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5>Stay Updated</h5>
+                    <p class="subscribe-txt">Subscribe to our newsletter for the latest updates from UVNS Services.</p>
+                    <div class="input-group newsletter">
+                        <input type="email" class="updated-box" placeholder="Your email">
+                        <button class="btn quick-btn">Join</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex justify-content-between flex-wrap">
+                <div>© 2025 Copyright UVNS Services. All Rights Reserved</div>
+                <div>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a> |
+                    <a href="#">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- Floating WhatsApp FAB -->
+<div class="wa-fab">
+  <span class="wa-label" id="waLabel">Chat with us!</span>
+
+  <!-- Open popup -->
+  <button class="wa-btn" onclick="toggleWaPopup()" aria-label="Open WhatsApp Chat">
+    <svg viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="16" fill="#25d366"/>
+      <path d="M23.5 8.5A10.44 10.44 0 0 0 16 5.5C10.2 5.5 5.5 10.2 5.5 16c0 1.85.48 3.65 1.4 5.25L5.5 26.5l5.4-1.4A10.44 10.44 0 0 0 16 26.5c5.8 0 10.5-4.7 10.5-10.5 0-2.8-1.09-5.43-3-7.5z" fill="#fff"/>
+    </svg>
+  </button>
+</div>
+
+<div class="wa-popup " id="waPopup">
+  <!-- Header -->
+  <div class="wa-popup-header">
+    <div class="wa-avatar">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"></path>
+      </svg>
+    </div>
+    <div>
+      <h6>UVNS Support</h6>
+      <div class="wa-online">Online</div>
+    </div>
+    <button class="wa-close-btn" onclick="toggleWaPopup()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- Chat body -->
+  <div class="wa-popup-body">
+    <div class="wa-bubble">
+      <p>👋 Hi! May I help you?</p>
+      <div class="wa-bubble-time" id="waMsgTime">11:45 AM</div>
+    </div>
+  </div>
+
+  <!-- Footer input -->
+  <div class="wa-popup-footer">
+    <input class="wa-input" type="text" id="waInput" placeholder="Type a message…" onkeydown="if(event.key==='Enter') sendToWa()">
+    <button class="wa-send" onclick="sendToWa()" aria-label="Send">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 21l21-9L2 3v7l15 2-15 2z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+ <script>
+        // Time
+(function () {
+  var now = new Date();
+  var h = now.getHours(), m = now.getMinutes();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  var time = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+
+  var el = document.getElementById('waMsgTime');
+  if (el) el.textContent = time;
+})();
+
+// Hide label
+setTimeout(function () {
+  var lbl = document.getElementById('waLabel');
+  if (lbl) lbl.style.display = 'none';
+}, 4000);
+
+var isOpen = false;
+
+// Toggle popup
+function toggleWaPopup() {
+  isOpen = !isOpen;
+
+  var popup = document.getElementById('waPopup');
+  popup.classList.toggle('open', isOpen);
+
+  if (isOpen) {
+    setTimeout(function () {
+      document.getElementById('waInput').focus();
+    }, 300);
+  }
+}
+
+// ✅ FIXED FUNCTION
+function sendToWa() {
+  var input = document.getElementById('waInput');
+  var msg = input.value.trim();
+
+  if (!msg) msg = "Hi! I want to know more about your services.";
+
+  // 👉 YOUR NUMBER (no +, no space)
+  var phone = "919811298324";
+
+  // Encode message
+  var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+
+  // Open WhatsApp
+  window.open(url, "_blank");
+}
+</script>
